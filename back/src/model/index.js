@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
     email: { type: String, unique: true },
     firstName: String,
     lastName: String,
@@ -12,11 +10,15 @@ const userSchema = new mongoose.Schema({
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
     active: { type: Boolean, default: true },
     isAdmin: { type: Boolean, default: false }
+}, {
+    timestamps: true
 });
 
 const tutorSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true },
     students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
+},{
+    timestamps: true
 });
 
 const studentSchema = new mongoose.Schema({
@@ -25,29 +27,33 @@ const studentSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true },
     tutor: { type: mongoose.Schema.Types.ObjectId, ref: 'Tutor' },
     responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }]
+},{
+    timestamps: true
 });
 
 const formSchema = new mongoose.Schema({
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
     title: String,
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
     responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }]
+}, {
+    timestamps: true
 });
 
 const questionSchema = new mongoose.Schema({
     text: String,
     type: String,
     form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' }
+},{
+    timestamps: true
 });
 
 const responseSchema = new mongoose.Schema({
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
     text: String,
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
     question: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
     form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' }
+},{
+    timestamps: true
 });
 
 const User = mongoose.model('User', userSchema);
