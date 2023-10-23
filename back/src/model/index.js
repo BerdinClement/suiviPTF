@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    email: { type: String, unique: true },
+    email: { type: String, unique: true, required: true },
     firstName: String,
     lastName: String,
     phone: String,
-    password: String,
+    password: { type: String, required: true },
     tutor: { type: mongoose.Schema.Types.ObjectId, ref: 'Tutor' },
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
     active: { type: Boolean, default: true },

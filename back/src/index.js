@@ -1,3 +1,5 @@
+const path = require('path');
+const glob = require('glob');
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors')
@@ -10,6 +12,15 @@ require('./db')();
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors())
+
+const routes = glob.sync('./src/**/*.router.js');
+
+routes.forEach((route) => {
+    import(path.resolve(route)).then((router) => {
+        const routeName = route.split('/').pop().replace('.router.js', '');
+        app.use(`/api/${routeName}`,router.default);
+    })
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

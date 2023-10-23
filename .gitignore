@@ -1,2 +1,3 @@
 .idea/
 back/.env
+back/package-lock.json
