@@ -42,6 +42,7 @@ const formSchema = new mongoose.Schema({
 const questionSchema = new mongoose.Schema({
     text: String,
     type: String,
+    required: { type: Boolean, default: false },
     form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' }
 },{
     timestamps: true

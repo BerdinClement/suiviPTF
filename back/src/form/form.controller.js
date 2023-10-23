@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { Form, Response } = require('../model');
+const { Form } = require('../model');
 
 const formController = {
     getAll: async (req, res) => {
@@ -49,7 +49,8 @@ const formController = {
         } ).catch((err) => {
             res.status(404).json(err)
         })
-    }
+    },
+
 }
 
 module.exports = formController
