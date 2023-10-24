@@ -17,7 +17,7 @@ router.post('/login', usersController.login);
 router.post('/logout', usersController.logout)
 
 router.delete('/:id', verifyAdmin, usersController.delete);
-router.put('/:id', verifyAdmin, usersController.activate);
+router.patch('/activate/:id', verifyAdmin, usersController.activate);
 router.get('/desactivated', verifyAdmin, usersController.getAllDesactivated);
 router.patch('/password/:id', usersController.changePassword);
 
