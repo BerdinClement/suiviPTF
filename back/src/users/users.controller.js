@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken');
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET
 
+const Logger = require('../utils/logger');
+const logger = Logger.getInstance();
+
 const usersController = {
     createStudent: async (req, res) => {
         const {email, password, firstName, lastName, phone} = req.body
@@ -66,6 +69,7 @@ const usersController = {
                         if (err) {
                             res.status(500).json({ message: 'Internal server error' });
                         } else {
+                            logger.info(`User ${user.email} logged in`);
                             res.cookie('token', token).status(200).json({ token: token, user });
                         }
                     });

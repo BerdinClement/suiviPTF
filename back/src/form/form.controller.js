@@ -132,7 +132,7 @@ const formController = {
                 }).catch((err) => {
                     res.status(404).json(err)
                 })
-                res.status(200).json("ok")
+                res.status(200).json()
             }).catch((err) => {
                 res.status(404).json(err)
             })
