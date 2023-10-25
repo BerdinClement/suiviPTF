@@ -26,12 +26,15 @@ const usersController = {
                 user.save().then((user) => {
                     res.status(201).json(user);
                 }).catch((err) => {
+                    logger.error(`${req.method} ${req.originalUrl} ${err}`)
                     res.status(404).json(err);
                 });
             }).catch((err) => {
+                logger.error(`${req.method} ${req.originalUrl} ${err}`)
                 res.status(404).json(err);
             });
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -48,12 +51,15 @@ const usersController = {
                 user.save().then((user) => {
                     res.status(201).json(user);
                 }).catch((err) => {
+                    logger.error(`${req.method} ${req.originalUrl} ${err}`)
                     res.status(404).json(err);
                 });
             }).catch((err) => {
+                logger.error(`${req.method} ${req.originalUrl} ${err}`)
                 res.status(404).json(err);
             });
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -65,7 +71,8 @@ const usersController = {
             } else {
                 const isValidPassword = bcrypt.compareSync(password, user.password);
                 if (isValidPassword) {
-                    jwt.sign({email: user.email, _id: user._id, admin: user.isAdmin}, jwtSecret, { expiresIn: process.env.JWT_EXPIRES_IN }, (err, token) => {
+                    const type = user.tutor ? 'tutor' : 'student';
+                    jwt.sign({email: user.email, _id: user._id, admin: user.isAdmin, type}, jwtSecret, { expiresIn: process.env.JWT_EXPIRES_IN }, (err, token) => {
                         if (err) {
                             res.status(500).json({ message: 'Internal server error' });
                         } else {
@@ -78,6 +85,7 @@ const usersController = {
                 }
             }
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -123,6 +131,7 @@ const usersController = {
         User.updateOne({ _id: id }, { email, firstName, lastName, phone }).then((user) => {
             res.status(200).json(user);
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -132,6 +141,7 @@ const usersController = {
         Student.updateOne({ _id: id }, { ine, num_etu }).then((student) => {
             res.status(200).json(student);
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -140,6 +150,7 @@ const usersController = {
         User.updateOne({ _id: id }, { active: false }).then((user) => {
             res.status(200).json(user);
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -148,6 +159,7 @@ const usersController = {
         User.updateOne({ _id: id }, { active: true }).then((user) => {
             res.status(200).json(user);
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     },
@@ -165,6 +177,7 @@ const usersController = {
         User.updateOne({ _id: id }, { password: newPassword }).then((user) => {
             res.status(200).json(user);
         }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
     }

@@ -10,7 +10,7 @@ class Logger {
     }
 
     format (message, type) {
-        return `[${new Date().toLocaleString()}] [${type}] ${message}`;
+        return `[${new Date().toLocaleString('fr')}] [${type}] ${message}`;
     }
 
     info (message) {

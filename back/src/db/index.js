@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+const Logger = require('../utils/logger');
+const logger = Logger.getInstance()
 
 const connect = () => {
     mongoose.connect(process.env.MONGO_URI).then(() => {
-        console.log('Connecté à la base de données');
+        logger.info('Connected to database');
     }).catch((err) => {
-        console.log('Erreur lors de la connxion à la base de données', err);
+        logger.error('Error connecting to database', err);
     });
 }
 

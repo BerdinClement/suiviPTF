@@ -6,6 +6,8 @@ const cors = require('cors')
 const app = express();
 const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 9000;
+const Logger = require('./utils/logger');
+const logger = Logger.getInstance()
 
 require('./db')();
 
@@ -23,5 +25,5 @@ routes.forEach((route) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    logger.info(`Server is running on port ${PORT}`);
 });

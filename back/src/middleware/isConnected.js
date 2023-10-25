@@ -15,10 +15,10 @@ isConnected = (req, res, next) => {
         req.auth = {
             userId: userId
         };
-        logger.info(`User : ${userId} request to ${req.method} ${req.originalUrl}`);
+        logger.info(`User : ${decodedToken.email} request to ${req.method} ${req.originalUrl}`);
         next();
     } catch(error) {
-        console.log(error)
+        logger.error(`${req.method} ${req.originalUrl} ${error}`)
         res.status(401).json({ message: 'Invalid request!' });
     }
 };

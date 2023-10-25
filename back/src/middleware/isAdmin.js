@@ -3,7 +3,7 @@ require('dotenv').config();
 const Logger = require('../utils/Logger');
 const logger = Logger.getInstance();
 
-verifyAdmin = (req, res, next) => {
+isAdmin = (req, res, next) => {
     if (!req.headers.authorization) res.status(403).json({message: 'You are not connected'})
     try {
         const token = req.headers.authorization.split(' ')[1];
@@ -13,12 +13,12 @@ verifyAdmin = (req, res, next) => {
         req.auth = {
             userId: userId
         };
-        logger.info(`User : ${userId} request to ${req.method} ${req.originalUrl}`);
+        logger.info(`Admin : ${decodedToken.email} request to ${req.method} ${req.originalUrl}`);
         next();
     } catch(error) {
-        console.log(error)
+        logger.error(`${req.method} ${req.originalUrl} ${error}`)
         res.status(401).json({ message: 'Invalid request!' });
     }
 };
 
-module.exports = verifyAdmin;
+module.exports = isAdmin;
