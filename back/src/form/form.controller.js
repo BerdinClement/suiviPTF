@@ -68,12 +68,21 @@ const formController = {
         }
         const decodedToken = verify(token, process.env.JWT_SECRET)
         const user = await User.findOne({id: decodedToken.id}).populate('student')
-        const form = Form.findById(id, {strictPopulate: false}).populate('questions').populate('responses').then((form) => {
+        const form = Form.findById(id, {options: {strictPopulate: false}}).populate({
+            path: 'questions',
+            populate: {
+                path: 'responses',
+                model: 'Response',
+                populate: {
+                    path: 'student',
+                    model: 'Student',
+                    match: { _id: user.student._id }
+                }
+            }
+        }).then((form) => {
             if (form) {
-                const responses = form.responses.filter((response) => {
-                    return response.student == user.student._id
-                })
-                res.status(200).json(responses)
+                logger.info(`${req.method} ${req.originalUrl} ${form.questions}`)
+                res.status(200).json(form)
             } else {
                 res.status(204).json({ message: 'Form not found' })
             }

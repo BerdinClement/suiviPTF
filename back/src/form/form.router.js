@@ -15,6 +15,6 @@ router.post('/', [isConnected, isAdmin], formController.create);
 
 router.delete('/:id', [isConnected, isAdmin], formController.delete);
 
-router.get('/reponses/:id', [isConnected, isStudent], formController.getUserResponseByForm);
+router.get('/responses/:id', [isConnected, isStudent], formController.getUserResponseByForm);
 
 module.exports = router;
