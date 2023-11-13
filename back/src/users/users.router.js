@@ -12,6 +12,8 @@ router.patch('/student/:id',[isConnected], usersController.updateStudent);
 
 router.post('/tutor', [isConnected, isAdmin], usersController.createTutor);
 router.get('/tutor',[isConnected], usersController.getAllTutors);
+router.put('/tutor/students/:id',[isConnected, isAdmin], usersController.affectStudents);
+router.patch('/tutor/students/:id',[isConnected, isAdmin], usersController.desaffectStudents);
 
 router.get('/profile',[isConnected], usersController.profile)
 router.post('/login', usersController.login);

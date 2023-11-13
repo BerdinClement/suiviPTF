@@ -34,7 +34,6 @@ const studentSchema = new mongoose.Schema({
 const formSchema = new mongoose.Schema({
     title: String,
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
-    responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }]
 }, {
     timestamps: true
 });
@@ -43,7 +42,8 @@ const questionSchema = new mongoose.Schema({
     text: String,
     type: String,
     required: { type: Boolean, default: false },
-    form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' }
+    form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' },
+    responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }]
 },{
     timestamps: true
 });
@@ -52,7 +52,6 @@ const responseSchema = new mongoose.Schema({
     text: String,
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
     question: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
-    form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' }
 },{
     timestamps: true
 });

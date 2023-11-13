@@ -180,6 +180,26 @@ const usersController = {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         });
+    },
+    affectStudents: async (req, res) => {
+        const tutorId = req.params.id;
+        const { students } = req.body;
+        Tutor.findByIdAndUpdate(tutorId, {$push : {students: students}}).then((tutor) => {
+            res.status(200).json(tutor);
+        }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
+            res.status(404).json(err);
+        })
+    },
+    desaffectStudents: async (req, res) => {
+        const tutorId = req.params.id;
+        const { students } = req.body;
+        Tutor.findByIdAndUpdate(tutorId, {$pull : {students: students}}).then((tutor) => {
+            res.status(200).json(tutor);
+        }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
+            res.status(404).json(err);
+        })
     }
 }
 

@@ -3,6 +3,7 @@ const router = require('express').Router();
 const formController = require('./form.controller');
 const isAdmin = require("../middleware/isAdmin");
 const isConnected = require("../middleware/isConnected");
+const isStudent = require("../middleware/isStudent");
 
 router.get('/',[isConnected], formController.getAll);
 
@@ -14,14 +15,6 @@ router.post('/', [isConnected, isAdmin], formController.create);
 
 router.delete('/:id', [isConnected, isAdmin], formController.delete);
 
-router.post('/question/:id', [isConnected, isAdmin], formController.addQuestion);
-
-router.post('/questions/:id', [isConnected, isAdmin], formController.addManyQuestion);
-
-router.delete('/question/:id/:questionId', [isConnected, isAdmin], formController.deleteQuestion);
-
-router.post('/response/:formId/:questionId',[isConnected], formController.addResponse);
-
-router.patch('/response/:id',[isConnected], formController.updateResponse);
+router.get('/reponses/:id', [isConnected, isStudent], formController.getUserResponseByForm);
 
 module.exports = router;

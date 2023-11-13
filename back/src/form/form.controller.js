@@ -6,7 +6,7 @@ const logger = Logger.getInstance()
 
 const formController = {
     getAll: async (req, res) => {
-        Form.find().populate(['questions', 'responses']).then((form) => {
+        Form.find().populate('questions').then((form) => {
             res.status(200).json(form)
         }).catch((err) => {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
@@ -59,58 +59,21 @@ const formController = {
             res.status(404).json(err)
         })
     },
-    addQuestion: async (req, res) => {
-        const {text, type, required} = req.body
-        Question.create({text, type, required}).then((question) => {
-            Form.updateOne({ _id: req.params.id }, { $push: { questions: question._id } }).then((form) => {
-                if (form) {
-                    res.status(200).json(form)
-                } else {
-                    res.status(204).json({ message: 'Form not found' })
-                }
-            }).catch((err) => {
-                logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                res.status(404).json(err)
-            })
-        }).catch((err) => {
-            logger.error(`${req.method} ${req.originalUrl} ${err}`)
-            res.status(404).json(err)
-        })
-    },
-    addManyQuestion: async (req, res) => {
-        const id = req.params.id
-        const {questions} = req.body
-        Question.insertMany(questions).then((questions) => {
-            Form.updateOne({ _id: id }, { $push: { questions: questions } }).then((form) => {
-                if (form) {
-                    res.status(200).json(form)
-                } else {
-                    res.status(204).json({ message: 'Form not found' })
-                }
-            }).catch((err) => {
-                logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                res.status(404).json(err)
-            })
-        }).catch((err) => {
-            logger.error(`${req.method} ${req.originalUrl} ${err}`)
-            res.status(404).json(err)
-        })
-    },
-    deleteQuestion: async (req, res) => {
-        const id = req.params.id
-        const questionId = req.params.questionId
-        Form.updateOne({ _id: id }, { $pull: { questions: questionId } }).then((form) => {
+    getUserResponseByForm: async (req, res) => {
+        const {id} = req.params;
+        const token = req.cookies.token
+        if (!token) {
+            logger.error(`${req.method} ${req.originalUrl} Unauthorized`)
+            res.status(401).json({error: "Unauthorized"})
+        }
+        const decodedToken = verify(token, process.env.JWT_SECRET)
+        const user = await User.findOne({id: decodedToken.id}).populate('student')
+        const form = Form.findById(id, {strictPopulate: false}).populate('questions').populate('responses').then((form) => {
             if (form) {
-                Question.findByIdAndDelete(questionId).then((question) => {
-                    if (question) {
-                        res.status(200).json({ message: 'Question deleted' })
-                    } else {
-                        res.status(204).json({ message: 'Question not found' })
-                    }
-                }).catch((err) => {
-                    logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                    res.status(404).json(err)
+                const responses = form.responses.filter((response) => {
+                    return response.student == user.student._id
                 })
+                res.status(200).json(responses)
             } else {
                 res.status(204).json({ message: 'Form not found' })
             }
@@ -118,59 +81,7 @@ const formController = {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err)
         })
-    },
-    addResponse: async (req, res) => {
-        const token = req.cookies.token
-        if (!token) {
-            logger.error(`${req.method} ${req.originalUrl} No token`)
-            return res.status(401).json({ message: 'No token' })
-        }
-        const decodedToken = verify(token, process.env.JWT_SECRET)
-        const userId = decodedToken._id
-        const {formId, questionId} = req.params
-        const {text} = req.body
-        const student = Student.findOne({user: userId}).then((student) => {
-            Response.create({student: student._id, form: formId, question: questionId, text}).then((response) => {
-                Student.updateOne({ _id: student._id }, { $push: { responses: response._id } }).then((stud) => {
-                    if (!stud) {
-                        res.status(204).json({ message: 'Student not found' })
-                    }
-                }).catch((err) => {
-                    logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                    res.status(404).json(err)
-                })
-                Form.updateOne({ _id: formId }, { $push: { responses: response._id } }).then((form) => {
-                    if (!form) {
-                        res.status(204).json({ message: 'Form not found' })
-                    }
-                }).catch((err) => {
-                    logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                    res.status(404).json(err)
-                })
-                res.status(200).json({message: 'Response added'})
-            }).catch((err) => {
-                logger.error(`${req.method} ${req.originalUrl} ${err}`)
-                res.status(404).json(err)
-            })
-        }).catch((err) => {
-            logger.error(`${req.method} ${req.originalUrl} ${err}`)
-            res.status(404).json(err)
-        })
-    },
-    updateResponse: async (req, res) => {
-        const {id} = req.params
-        const {text} = req.body
-        Response.updateOne({ id }, {text}).then((response) => {
-            if (response) {
-                res.status(200).json(response)
-            } else {
-                res.status(204).json({ message: 'Response not found' })
-            }
-        }).catch((err) => {
-            logger.error(`${req.method} ${req.originalUrl} ${err}`)
-            res.status(404).json(err)
-        })
-    },
+    }
 }
 
 module.exports = formController
