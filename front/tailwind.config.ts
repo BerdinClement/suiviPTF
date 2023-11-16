@@ -14,6 +14,11 @@ const config: Config = {
         grey: '#EBEEF6',
         deep_blue: '#2B2D41',
         green: '#A8E0A7',
+        f_red: '#EA5C5C',
+        f_green: '#66D478',
+        f_orange: '#FFA95A',
+        blue_login: '#EBEEF6',
+        back_login: '#2B2D41'
       }
     },
   },
