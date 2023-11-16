@@ -1,3 +1,7 @@
+"use client"
+
+import React, { useState } from 'react';
+
 interface InputProps {
     placeholder: string;
     type: string;
@@ -5,6 +9,8 @@ interface InputProps {
 }
 
 const Input = ({ placeholder, type, className }: InputProps) => {
+    const [inputValue, setInputValue] = useState('');
+
     return (
         <div className="flex items-center justify-center mt-6 w-full">
         <div className={`
@@ -14,6 +20,8 @@ const Input = ({ placeholder, type, className }: InputProps) => {
             <input
             id={`${placeholder}`}
             name={`${placeholder}`}
+            value={inputValue}
+            onChange={(e) => {setInputValue(e.target.value)}}
             type={type}
             className={`
                 border-b 
@@ -29,7 +37,7 @@ const Input = ({ placeholder, type, className }: InputProps) => {
                 `}
             />
             <label htmlFor={`${placeholder}`}
-            className="absolute left-0 top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-purple"
+            className={`absolute left-0 top-1 cursor-text ${inputValue == '' ? "peer-focus:text-xs" : "text-xs"} ${inputValue == '' ? "peer-focus:-top-4" : "-top-4"} ${inputValue == '' ? "peer-focus:text-purple" : "text-purple"} transition-all `}
             >{placeholder}</label>
         </div>
         </div>

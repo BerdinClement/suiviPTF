@@ -18,7 +18,8 @@ const config: Config = {
         f_green: '#66D478',
         f_orange: '#FFA95A',
         blue_login: '#EBEEF6',
-        back_login: '#2B2D41'
+        back_login: '#2B2D41',
+        student_back: "#F9F9F9"
       }
     },
   },

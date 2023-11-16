@@ -1,5 +1,8 @@
 import FormCard from "@/components/FormCard"
+import Hello from "@/components/Hello"
+import HistoryCard from "@/components/HistoryCard"
 import ShortCutCard from "@/components/ShortCutCard"
+import { Divider } from "antd"
 
 const forms = [
   {
@@ -74,29 +77,73 @@ const forms = [
   }
 ]
 
+const history = [
+  {
+    date: "12/12/2021",
+    title: "Titre 1",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl"
+
+  },
+  {
+    date: "12/12/2021",
+    title: "Titre 2",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl"
+
+  },
+  {
+    date: "12/12/2021",
+    title: "Titre 3",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl"
+
+  },
+  {
+    date: "12/12/2021",
+    title: "Titre 4",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl"
+
+  },
+  {
+    date: "12/12/2021",
+    title: "Titre 5",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl"
+
+  }
+]
+
 export default function Home() {
   return (
-    <div className="flex h-full">
-      <div className="bg-grey w-9/12 h-full flex rounded-t-xl p-4">
-        <div className="w-9/12">
-          <p className="mb-4 text-xl p-4">Mes Formulaires</p>
-          <div className="flex flex-col gap-6 pr-4">
-            {
-              forms.map((form, index) => {
-                return (
-                  <FormCard title={form.title} id={form.id} date={form.date} />
-                )
-              })
-            }
+    <div className="flex flex-col h-full">
+      <div className="flex">
+        <div className="bg-grey w-9/12 h-full flex rounded-t-xl p-4">
+          <div className="w-9/12">
+            <p className="mb-4 text-xl p-4">Mes Formulaires</p>
+            <div className="flex flex-col gap-6 pr-4">
+              {
+                forms.map((form, index) => {
+                  return (
+                    <FormCard title={form.title} id={form.id} date={form.date} />
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div>
+            <p className="mb-4 text-xl">Raccourcis</p>
+            <ShortCutCard />
           </div>
         </div>
-        <div>
-          <p className="mb-4 text-xl">ShortCut</p>
-          <ShortCutCard />
+        <div className="h-full flex-1 py-10 hidden md:block flex flex-col">
+          <Hello firstName={"Clément"} lastName={"Berdin"} />
+          <Divider />
+          <p className="text-[1.8vw]">Historique</p>
+          {
+            history.map((history, index) => {
+              return (
+                <HistoryCard date={history.date} className="p-2 m-2" title={history.title} content={history.content} />
+              )
+            })
+          }
         </div>
-      </div>
-      <div className="bg-blue-500 2xl:bg-blue-900 h-full flex-1 hidden md:block flex flex-col">
-        z
       </div>
     </div>
   )

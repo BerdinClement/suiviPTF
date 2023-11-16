@@ -4,11 +4,12 @@ interface HistoryCardProps {
     date: string;
     title: string;
     content: string;
+    className?: string;
 }
 
-const HistoryCard = ({date, title, content}:HistoryCardProps) => {
+const HistoryCard = ({date, title, content, className}:HistoryCardProps) => {
     return (
-        <div className={`flex rounded-lg w-72 bg-grey`}>
+        <div className={`flex rounded-lg bg-grey ${className}`}>
             <div className="flex flex-1 bg-grey p-2 rounded-lg">
                 <div className="flex flex-col">
                     <h3 className="text-sm">{date}</h3>

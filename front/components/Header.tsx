@@ -19,6 +19,10 @@ const Header = ({ children }: HeaderProps) => {
                 separator=">"
                 className='py-4 text-[20px]'
                 items={[
+                    {
+                        href: '/',
+                        title: "Accueil",
+                      },
                     ...pathname.map((segment, index) => ({
                         href: `/${pathname.slice(0, index + 1).join('/')}`,
                         title: (
