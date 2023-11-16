@@ -9,29 +9,25 @@ interface HeaderProps {
     children: React.ReactNode;
 }
 
-const Header = ({children}: HeaderProps) => {
+const Header = ({ children }: HeaderProps) => {
 
     const pathname = usePathname().split('/').filter((x) => x)
 
     return (
-        <div className='flex flex-col text-[24px] h-full'>
+        <div className='flex flex-col h-full'>
             <Breadcrumb
-            separator=">"
-            className='py-4'
-            items={[
-                {
-                    href: '/',
-                    title: <HomeOutlined />,
-                },
-                ...pathname.map((segment, index) => ({
-                    href: `/${pathname.slice(0, index + 1).join('/')}`,
-                    title: (
-                        <>
-                            <span className="capitalize">{segment}</span>
-                        </>
-                    ),
-                })),
-            ]}/>
+                separator=">"
+                className='py-4 text-[20px]'
+                items={[
+                    ...pathname.map((segment, index) => ({
+                        href: `/${pathname.slice(0, index + 1).join('/')}`,
+                        title: (
+                            <>
+                                <span className="capitalize">{segment}</span>
+                            </>
+                        ),
+                    })),
+                ]} />
             <div className='h-full'>
                 {children}
             </div>
