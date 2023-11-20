@@ -13,7 +13,7 @@ interface StudentCardProps {
 const StudentCard = ({ name, email, year }: StudentCardProps) => {
     {
         return (
-            <div className="bg-white p-4 m-8 w-[290px] shadow-lg rounded-lg">
+            <div className="bg-white p-4 mx-8 mb-8 w-[290px] shadow-lg rounded-lg hover:shadow-xl">
                 <h1 className="text-xl">{name}</h1>
                 <h3>{email}</h3>
                 <h3>{year}</h3>
@@ -21,8 +21,9 @@ const StudentCard = ({ name, email, year }: StudentCardProps) => {
                     <div className="cursor-pointer hover:text-3xl">
                         <UserOutlined />
                     </div>
-                    <div className="cursor-pointer hover:text-3xl"></div>
-                    <SolutionOutlined />
+                    <div className="cursor-pointer hover:text-3xl">
+                        <SolutionOutlined />
+                    </div>
                 </div>
             </div>
 

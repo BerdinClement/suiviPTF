@@ -129,7 +129,7 @@ export default function Home() {
           </div>
           <div>
             <p className="mb-4 text-xl">Raccourcis</p>
-            <ShortCutCard />
+            <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
           </div>
         </div>
         <div className="h-full flex-1 py-10 hidden md:block flex flex-col">
