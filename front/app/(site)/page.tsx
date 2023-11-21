@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex">
-        <div className="bg-grey w-9/12 h-full flex rounded-t-xl p-4">
+        <div className="bg-background w-9/12 h-full flex rounded-t-xl p-4">
           <div className="w-9/12">
             <p className="mb-4 text-xl p-4">Mes Formulaires</p>
             <div className="flex flex-col gap-6 pr-4">

@@ -19,7 +19,7 @@ const config: Config = {
         f_orange: '#FFA95A',
         blue_login: '#EBEEF6',
         back_login: '#2B2D41',
-        student_back: "#F9F9F9"
+        background: "#F9F9F9"
       }
     },
   },

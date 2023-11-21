@@ -10,7 +10,7 @@ interface ShortCutCardProps {
     // icon: React.ForwardRefExoticComponent<any>;
     href: string;
     label: string;
-    className: string;
+    className?: string;
 }
 
 const ShortCutCard = ({ label, href, className }: ShortCutCardProps) => {

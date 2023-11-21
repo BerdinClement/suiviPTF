@@ -7,12 +7,13 @@ interface FormCardProps {
     title: string;
     date: string;
     id: string;
+    className?: string;
 }
 
-const FormCard = ({ title, date, id }: FormCardProps) => {
+const FormCard = ({ title, date, id, className }: FormCardProps) => {
 
     return (
-        <Link href="/form" className={`flex rounded-lg bg-f_green shadow-md`}>
+        <Link href="/form" className={`flex rounded-lg bg-f_green shadow-md ${className} `}>
             <div className="w-3 rounded-lg">
 
             </div>

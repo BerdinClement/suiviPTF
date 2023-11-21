@@ -1,4 +1,4 @@
-import Input from "@/components/Input"
+import InputLogin from "@/components/InputLogin"
 import Button from "@/components/Button"
 import CheckBox from "@/components/CheckBox"
 import Image from 'next/image'
@@ -10,7 +10,7 @@ export default function Login() {
       <div className="flex w-11/12 h-5/6 rounded-[37px] bg-blue_login flex m-auto p-3">
 
         <div className="hidden relative lg:block w-[700px] h-full m-auto">
-          <Image src="/login-bg.jpeg" alt="PTF" layout='fill' objectFit='contain' className="rounded-[100px]"/>
+          <Image src="/login-bg.jpeg" alt="PTF" layout='fill' objectFit='contain' className="rounded-[100px]" />
         </div>
 
         <form className="bg-white w-full lg:w-5/12 h-full rounded-[37px] p-4">
@@ -22,8 +22,8 @@ export default function Login() {
             </div>
 
             <div>
-              <Input type="email" placeholder="Email" className="w-10/12"></Input>
-              <Input type="password" placeholder="Mot de passe" className="w-10/12"></Input>
+              <InputLogin type="email" placeholder="Email" className="w-10/12"></InputLogin>
+              <InputLogin type="password" placeholder="Mot de passe" className="w-10/12"></InputLogin>
               <div className="flex justify-between items-center w-10/12 m-auto pt-4">
                 <CheckBox checked={false} text="Se souvenir de moi" />
                 <Link href="#">
