@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
 
 interface FormCardProps {
     title: string;
@@ -13,7 +12,7 @@ interface FormCardProps {
 const FormCard = ({ title, date, id, className }: FormCardProps) => {
 
     return (
-        <Link href="/form" className={`flex rounded-lg bg-f_green shadow-md ${className} `}>
+        <Link href={`/formulaires/${id}`} className={`flex rounded-lg bg-f_green shadow-md ${className} `}>
             <div className="w-3 rounded-lg">
 
             </div>

@@ -33,7 +33,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     <Link
                                         key={index}
                                         href={link.href}
-                                        className={`flex items-center text-black text-sm ${open ? 'p-2 ml-2 rounded-l-xl' : 'rounded-full m-2'} ${path === link.href ? 'bg-purple' : 'hover:bg-grey'}`}
+                                        className={`flex items-center text-black text-sm ${open ? 'p-2 ml-2 rounded-l-xl' : 'rounded-full m-2'} ${path === link.href ? 'bg-purple text-white' : 'hover:bg-grey'}`}
                                     >
                                         <Icon component={link.icon as React.ForwardRefExoticComponent<any>} className="p-2 m-2 text-xl" />
                                         {

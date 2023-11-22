@@ -1,16 +1,17 @@
 import React from 'react';
 
 interface QuestionFormProps {
-
+    id: string;
+    question: string;
 }
 
-const QuestionForm = ({ }: QuestionFormProps) => {
+const QuestionForm = ({ id, question }: QuestionFormProps) => {
     return (
         <div>
-            <div className="w-full bg-grey flex flex-wrap p-[20px]">
-                <h2 className="font-bold w-full">Question 1 :</h2>
-                <p className="pb-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ex erat, scelerisque sit amet orci et, viverra convallis sapien. Nunc porta nulla eu fringilla sagittis. Aenean facilisis tincidunt lacus, quis accumsan justo facilisis in. Donec ac ipsum et libero tempus tristique nec a mi. Maecenas eu scelerisque leo. </p>
-                <textarea placeholder="Votre réponse" className="bg-white rounded-3xl border-gray-300 text-black px-2 py-1 min-w-full min-h-[200px]"></textarea>
+            <div className="w-full flex flex-wrap p-[20px]">
+                <h2 className="font-bold w-full">Question {id} :</h2>
+                <p className="pb-[10px]">{question}</p>
+                <textarea placeholder="Votre réponse" className="border focus:border-none focus:outline-none bg-white rounded-3xl px-2 py-1 min-w-full min-h-[200px]"></textarea>
             </div>
         </div>
     )

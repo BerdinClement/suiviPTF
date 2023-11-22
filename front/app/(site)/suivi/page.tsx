@@ -6,6 +6,7 @@ const SuiviPage = () => {
             <h1 className="p-8 underline text-2xl">Listes des suivis</h1>
             <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="w-1/6 ml-4" />
         </div>
+        /** TODO : boucler sur tout les suivis existants*/
     );
 }
 
