@@ -23,9 +23,17 @@ const FormsPage = () => {
                     </div>
                 </div>
                 {/* TODO : boucler sur tout les formulaires existants*/}
-                <div className="flex">
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full mr-4"></FormCard>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full"></FormCard>
+                <div className="flex flex-wrap">
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"></FormCard>
                 </div>
             </div>
         </div>

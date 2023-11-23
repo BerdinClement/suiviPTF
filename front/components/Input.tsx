@@ -4,16 +4,16 @@ import React from 'react';
 
 interface InputProps {
     type: string;
-    className: string;
+    className?: string;
     placeholder?: string;
 }
 
-const Input = ({ placeholder, className, type } : InputProps ) => {
+const Input = ({ placeholder, className, type }: InputProps) => {
     {
         return (
             <div className="">
-                <input 
-                    type={type} 
+                <input
+                    type={type}
                     className={`
                         relative 
                         bg-gray-50ring-0 
@@ -31,8 +31,8 @@ const Input = ({ placeholder, className, type } : InputProps ) => {
                         p-2.5 
                         checked:bg-emerald-500
                         ${className}
-                    `} 
-                    placeholder={placeholder}/>
+                    `}
+                    placeholder={placeholder} />
             </div>
         )
     }

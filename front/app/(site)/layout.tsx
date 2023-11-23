@@ -9,7 +9,9 @@ export default function layout({
   return (
     <Sidebar>
       <Header>
-        {children}
+        <div className="h-full w-full bg-background">
+          {children}
+        </div>
       </Header>
     </Sidebar>
   )

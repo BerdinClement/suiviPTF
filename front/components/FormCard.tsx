@@ -8,11 +8,17 @@ interface FormCardProps {
     id: string;
     className?: string;
 }
+const getRandomColor = () => {
+    const colors = ['bg-f_red', 'bg-f_orange', 'bg-f_green'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
 
 const FormCard = ({ title, date, id, className }: FormCardProps) => {
+    const randomColor = getRandomColor();
 
     return (
-        <Link href={`/formulaires/${id}`} className={`flex rounded-lg bg-f_green shadow-md ${className} `}>
+    <Link href={`/formulaires/${id}`} className={`flex rounded-lg shadow-md ${randomColor} ${className}`}>
             <div className="w-3 rounded-lg">
 
             </div>

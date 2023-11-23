@@ -13,7 +13,7 @@ const Hello = ({firstName, lastName}: HelloProps) => {
                 <p className='text-[3vw]'>Bonjour,</p>
                 <p className='text-purple text-[2.5vw]'>{firstName}</p>
             </div>
-            <Image src={`https://ui-avatars.com/api/?rounded=true+name=${firstName}+${lastName}+format=svg`} className='rounded-full' width={90} height={10} alt={'Icon Profil'} />
+            <Image src="https://loremflickr.com/90/90/ia" className='rounded-full' width={90} height={10} alt={'Icon Profil'} />
         </div>
     )
 }
