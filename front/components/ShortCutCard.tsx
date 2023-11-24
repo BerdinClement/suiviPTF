@@ -16,8 +16,8 @@ interface ShortCutCardProps {
 const ShortCutCard = ({ label, href, className }: ShortCutCardProps) => {
     {
         return (
-            <Link key={label} href={href} className={`${className} rounded-full md:rounded-3xl bg-black/25 flex justify-center items-center hover:shadow-lg `}>
-                <div className="w-[93%] h-[93%] flex flex-col justify-center items-center bg-grey aspect-square rounded-full md:rounded-3xl">
+            <Link key={label} href={href} className={`${className} rounded-full md:rounded-3xl bg-black/25 flex justify-center items-center shadow-lg `}>
+                <div className="w-[93%] h-[93%] flex flex-col justify-center items-center bg-white aspect-square rounded-full md:rounded-3xl">
                     <Icon component={FileAddOutlined as React.ForwardRefExoticComponent<any>} className="p-2 m-2 text-[40px] md:text-[80px] opacity-40" />
                     <div className=" hidden md:block text-2xl font-bold text-center opacity-40">{label}</div>
                 </div>

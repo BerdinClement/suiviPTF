@@ -7,12 +7,12 @@ export default function layout({
   children: React.ReactNode
 }) {
   return (
-    <Sidebar>
-      <Header>
-        <div className="h-full w-full bg-background">
-          {children}
-        </div>
-      </Header>
-    </Sidebar>
+      <Sidebar> 
+        <Header>
+          <div className="h-full w-full bg-background overflow-hidden">
+            {children}
+          </div>
+        </Header>
+      </Sidebar>
   )
 }

@@ -28,36 +28,36 @@ const StudentsPage = () => {
     ]
 
     return (
-        <div>
-            <div className="flex flex-row justify-between py-4">
-                <h1 className="underline text-2xl">Liste des étudiants</h1>
-                <Button type="button" className="bg-purple" onClick={() => setOpen(!open)}>
-                    {open ? 'Fermer' : 'Ajouter un étudiant'}
-                </Button>
-            </div>
-            <div className={`px-8 ${open ? 'blur-sm ' : ''}`}>
-
-                <div className="flex flex-row justify-between pb-8">
-                    <div className="flex">
-                        <Input type="text" placeholder="Mail : ..." className="mr-8"></Input>
-                        <Input type="text" placeholder="Prénom : ..." className="mr-8"></Input>
-                        <Dropdown className="" options={optionList}></Dropdown>
-                    </div>
-                    <div className="flex">
-                        <RefreshButton></RefreshButton>
-                    </div>
+        <div className="w-full h-full bg-background">
+            <div className="px-8">
+                <div className="flex flex-row justify-between py-4">
+                    <h1 className="underline text-2xl">Liste des étudiants</h1>
+                    <Button type="button" className="bg-purple" onClick={() => setOpen(!open)}>
+                        {open ? 'Fermer' : 'Ajouter un étudiant'}
+                    </Button>
                 </div>
-                <div className="flex flex-wrap">
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
-                    <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP"></StudentCard>
+                <div className={`${open ? 'blur-sm ' : ''}`}>
+                    <div className="flex flex-row justify-between pb-8">
+                        <div className="flex">
+                            <Input type="text" placeholder="Titre : ..." className="mr-8"></Input>
+                        </div>
+                        <div className="flex">
+                            <RefreshButton/>
+                        </div>
+                    </div>
+                    <div className="flex flex-wrap">
+                        {/*  TODO : boucler sur tout les etudiants existants */}
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                    </div>
                 </div>
             </div>
             {open && (
@@ -66,6 +66,7 @@ const StudentsPage = () => {
                 </div>
             )}
         </div>
+
     );
 }
 

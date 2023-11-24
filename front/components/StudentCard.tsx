@@ -7,13 +7,14 @@ interface StudentCardProps {
     name: string;
     email: string;
     year: string;
+    className?: string;
 }
 
 
-const StudentCard = ({ name, email, year }: StudentCardProps) => {
+const StudentCard = ({ name, email, year, className }: StudentCardProps) => {
     {
         return (
-            <div className="bg-white p-4 mx-8 mb-8 w-[290px] shadow-lg rounded-lg hover:shadow-xl">
+            <div className={` ${className} bg-white p-4 w-[290px] shadow-lg rounded-lg hover:shadow-xl`}>
                 <h1 className="text-xl">{name}</h1>
                 <h3>{email}</h3>
                 <h3>{year}</h3>
