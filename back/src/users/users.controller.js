@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET
 
-const Logger = require('../utils/logger');
+const Logger = require('../utils/Logger');
 const logger = Logger.getInstance();
 
 const usersController = {
@@ -90,7 +90,7 @@ const usersController = {
         });
     },
     profile: async (req, res) => {
-        const {token} = req.cookies;
+        const token = req.headers.authorization.split(' ')[1].replace(/"/g, '');
         if(token){
             jwt.verify(token, jwtSecret, {}, async (err, userData) => {
                 if(err) throw err

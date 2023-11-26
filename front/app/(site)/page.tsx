@@ -2,7 +2,9 @@ import FormCard from "@/components/FormCard"
 import Hello from "@/components/Hello"
 import HistoryCard from "@/components/HistoryCard"
 import ShortCutCard from "@/components/ShortCutCard"
+import { UserContext } from "@/context/userContext"
 import { Divider } from "antd"
+import { useContext } from "react"
 
 const forms = [
   {
@@ -115,40 +117,6 @@ const history = [
 
 export default function Home() {
   return (
-    // <div className="">
-    //   <div className="flex">
-    //     <div className="bg-background w-9/12 flex rounded-t-xl p-4">
-    //       <div className="w-6/12">
-    //         <p className="mb-4 text-xl p-4">Mes Formulaires</p>
-    //         <div className="flex flex-col gap-6 pr-4">
-    //           {
-    //             forms.map((form, index) => {
-    //               return (
-    //                 <FormCard title={form.title} id={form.id} date={form.date} />
-    //               )
-    //             })
-    //           }
-    //         </div>
-    //       </div>
-    //       <div className="m-6/12">
-    //         <p className="mb-4 text-xl">Raccourcis</p>
-    //         <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-    //       </div>
-    //     </div>
-    //     <div className="h-full flex-1 py-10 hidden md:block flex flex-col">
-    //       <Hello firstName={"Clément"} lastName={"Berdin"} />
-    //       <Divider />
-    //       <p className="text-[1.8vw]">Historique</p>
-    //       {
-    //         history.map((history, index) => {
-    //           return (
-    //             <HistoryCard date={history.date} className="p-2 m-2" title={history.title} content={history.content} />
-    //           )
-    //         })
-    //       }
-    //     </div>
-    //   </div>
-    // </div>
     <div className="w-full flex flew-wrap ">
       <div className="w-4/12 ">
         <h1 className="text-2xl p-6 font-bold">Mes formulaires</h1>
@@ -168,12 +136,10 @@ export default function Home() {
           <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
           <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
         </div>
-      </div>
-      <div className="w-3/12 bg-white">
-        <Hello firstName={"Clément"} lastName={"Berdin"} />
-        <Divider />
-        <p className="text-[1.8vw]">Historique</p>
-        <div className="overflow-scroll-y">
+        <div className="h-full flex-1 py-10 hidden md:block flex flex-col">
+          <Hello />
+          <Divider />
+          <p className="text-[1.8vw]">Historique</p>
           {
             history.map((history, index) => {
               return (

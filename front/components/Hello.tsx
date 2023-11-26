@@ -1,19 +1,20 @@
+'use client'
+import { UserContext } from '@/context/userContext'
 import Image from 'next/image'
+import { useContext } from 'react'
 
-interface HelloProps {
-    firstName: string,
-    lastName: string,
-}
+const Hello = () => {
 
-const Hello = ({firstName, lastName}: HelloProps) => {
+    const { user } = useContext(UserContext)
+    
 
     return (
         <div className='flex items-center justify-center gap-4'>
             <div className='flex flex-col'>
                 <p className='text-[3vw]'>Bonjour,</p>
-                <p className='text-purple text-[2.5vw]'>{firstName}</p>
+                <p className='text-purple text-[2.5vw]'>{user.user.firstName ? user.user.firstName : ''}</p>
             </div>
-            <Image src="https://loremflickr.com/90/90/ia" className='rounded-full' width={90} height={10} alt={'Icon Profil'} />
+            <Image src={`https://ui-avatars.com/api/?rounded=true&name=${user.user.firstName}+${user.user.lastName}`} className='rounded-full' width={90} height={10} alt={'Icon Profil'} />
         </div>
     )
 }

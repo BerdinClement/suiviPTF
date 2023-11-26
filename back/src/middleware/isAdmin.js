@@ -6,7 +6,7 @@ const logger = Logger.getInstance();
 isAdmin = (req, res, next) => {
     if (!req.headers.authorization) res.status(403).json({message: 'You are not connected'})
     try {
-        const token = req.headers.authorization.split(' ')[1];
+        const token = req.headers.authorization.split(' ')[1].replace(/"/g, '');
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedToken._id;
         if(!decodedToken.admin) res.status(403).json({message: 'You are not an admin'})

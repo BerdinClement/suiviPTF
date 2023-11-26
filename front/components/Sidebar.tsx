@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from 'next/image'
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { logout } from "@/services/auth";
 
 
 interface SidebarProps {
@@ -21,6 +22,11 @@ const Sidebar = ({ children }: SidebarProps) => {
 
     const path = usePathname();
 
+    const handleLogout = async () => {
+        await logout();
+        router.push("/login");
+    }
+
     return (
         <div className="flex h-full">
             <nav className="hidden md:flex flex-col justify-between items-center transition-all shadow-2xl">
@@ -29,9 +35,8 @@ const Sidebar = ({ children }: SidebarProps) => {
                     <div>
                         {SIDEBAR_LINKS.map((link, index) => {
                             return (
-                                <Tooltip placement="right" title={link.label}>
+                                <Tooltip placement="right" key={index} title={link.label}>
                                     <Link
-                                        key={index}
                                         href={link.href}
                                         className={`flex items-center text-black text-sm ${open ? 'p-2 ml-2 rounded-l-xl' : 'rounded-full m-2'} ${path === link.href ? 'bg-purple text-white' : 'hover:bg-grey'}`}
                                     >
@@ -49,7 +54,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                         <button
                             className={`flex items-center text-black text-sm ${open ? 'p-2 w-full' : 'rounded-full m-2'}`}
                         >
-                            <LogoutOutlined onClick={() => (router.push('/login'))} className="p-2 m-2 text-xl" />
+                            <LogoutOutlined onClick={handleLogout} className="p-2 m-2 text-xl" />
                             {
                                 open && 'Se déconnecter'
                             }
@@ -89,7 +94,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                     )
 
                 })}
-                <FloatButton icon={<LogoutOutlined />} onClick={() => (router.push('/login'))} tooltip={<div>Se déconnecter</div>} />
+                <FloatButton icon={<LogoutOutlined />} onClick={handleLogout} tooltip={<div>Se déconnecter</div>} />
             </FloatButton.Group>
             <main className="h-full flex-1 h-full overflow-y-auto p-2 bg-white">
                 {children}

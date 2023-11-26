@@ -13,7 +13,10 @@ require('./db')();
 
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+    origin: process.env.FRONT_URL,
+    credentials: true
+}))
 
 const routes = glob.sync('./src/**/*.router.js');
 

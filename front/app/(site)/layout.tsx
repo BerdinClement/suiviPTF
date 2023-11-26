@@ -1,18 +1,23 @@
 import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
+import dynamic from "next/dynamic"
+
+const Protected = dynamic(() => import('./Protected'), { ssr: false })
 
 export default function layout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-      <Sidebar> 
-        <Header>
-          <div className="h-full w-full bg-background overflow-hidden">
-            {children}
-          </div>
-        </Header>
-      </Sidebar>
-  )
+
+
+    return (
+        <Protected>
+            <Sidebar>
+                <Header>
+                    {children}
+                </Header>
+            </Sidebar>
+        </Protected>
+    )
 }
