@@ -1,12 +1,11 @@
 "use client"
 
-import StudentCard from "@/components/StudentCard";
 import Input from "@/components/Input";
-import Dropdown from "@/components/Dropdown";
 import Button from "@/components/Button";
 import RefreshButton from "@/components/RefreshButton";
 import Popup, { InputItem } from "@/components/Popup";
 import React, { useState } from "react";
+import StudentsList from "./studentsList";
 
 const StudentsPage = () => {
     const [open, setOpen] = useState(false);
@@ -46,17 +45,7 @@ const StudentsPage = () => {
                         </div>
                     </div>
                     <div className="flex flex-wrap">
-                        {/*  TODO : boucler sur tout les etudiants existants */}
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
-                        <StudentCard name="BERDIN Clément" email="c.berdin@etu.univ-littoral.fr" year="BUT3 APP" className="w-60 m-4"/>
+                        <StudentsList />
                     </div>
                 </div>
             </div>

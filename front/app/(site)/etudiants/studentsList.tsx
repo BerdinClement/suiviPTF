@@ -22,11 +22,10 @@ const StudentsList = () => {
 
     return (
         <div>
-            <h1>Students</h1>
             <ul>
                 {
                     students.map((student) => (
-                        <StudentCard name={`${student.user.firstName} ${student.user.lastName}`} email={student.user.email} year={"2002"} />
+                        <StudentCard name={`${student.user.firstName} ${student.user.lastName}`} email={student.user.email} year={"2002"} className="w-60 m-4"/>
                     ))
                 }
             </ul>
