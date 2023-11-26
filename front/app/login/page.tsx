@@ -1,6 +1,6 @@
 'use client'
 
-import Input from "@/components/Input"
+import InputLogin from "@/components/InputLogin"
 import Button from "@/components/Button"
 import CheckBox from "@/components/CheckBox"
 import Image from 'next/image'
@@ -50,8 +50,8 @@ export default function Login() {
 						</div>
 
 						<div>
-							<Input type="email" inputValue={email} setInputValue={setEmail} placeholder="Email" className="w-10/12"></Input>
-							<Input type="password" inputValue={password} setInputValue={setPassword} placeholder="Mot de passe" className="w-10/12"></Input>
+							<InputLogin type="email" inputValue={email} setInputValue={setEmail} placeholder="Email" className="w-10/12"></InputLogin>
+							<InputLogin type="password" inputValue={password} setInputValue={setPassword} placeholder="Mot de passe" className="w-10/12"></InputLogin>
 							<div className="flex justify-between items-center w-10/12 m-auto pt-4">
 								<CheckBox checked={rememberMe} setChecked={setRememberMe} text="Se souvenir de moi" />
 								<Link href="#">

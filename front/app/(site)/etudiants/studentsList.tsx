@@ -21,15 +21,13 @@ const StudentsList = () => {
     }
 
     return (
-        <div>
-            <ul>
+        <>
                 {
                     students.map((student) => (
-                        <StudentCard name={`${student.user.firstName} ${student.user.lastName}`} email={student.user.email} year={"2002"} className="w-60 m-4"/>
+                        <StudentCard name={`${student.user.firstName} ${student.user.lastName}`} email={student.user.email} year={"2002"} className="w-full md:w-80"/>
                     ))
                 }
-            </ul>
-        </div>
+        </>
     );
 };
 

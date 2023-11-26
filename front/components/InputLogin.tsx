@@ -1,15 +1,15 @@
 "use client"
 
-import React, { useState } from 'react';
 
-interface InputLoginProps {
-    placeholder: string;
+interface InputProps {
     type: string;
-    className?: string;
+    placeholder: string;
+    className: string;
+    inputValue: any;
+    setInputValue: (newInputValue:any)=>void;
 }
 
-const InputLogin = ({ placeholder, type, className }: InputLoginProps) => {
-    const [inputValue, setInputValue] = useState('');
+const InputLogin = ({ placeholder, type, className, inputValue, setInputValue }: InputProps) => {
 
     return (
         <div className="flex items-center justify-center mt-6 w-full">
@@ -37,18 +37,8 @@ const InputLogin = ({ placeholder, type, className }: InputLoginProps) => {
                 `}
             />
             <label htmlFor={`${placeholder}`}
-            className={`
-                absolute 
-                left-0 
-                top-1 
-                cursor-text 
-                ${inputValue == '' ? "peer-focus:text-xs" : "text-xs"} 
-                ${inputValue == '' ? "peer-focus:-top-4" : "-top-4"} 
-                ${inputValue == '' ? "peer-focus:text-purple" : "text-purple"}
-                transition-all 
-            `}>
-                {placeholder}
-            </label>
+            className={`absolute left-0 top-1 cursor-text ${inputValue == '' ? "peer-focus:text-xs" : "text-xs"} ${inputValue == '' ? "peer-focus:-top-4" : "-top-4"} ${inputValue == '' ? "peer-focus:text-purple" : "text-purple"} transition-all `}
+            >{placeholder}</label>
         </div>
         </div>
     );

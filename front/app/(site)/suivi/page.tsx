@@ -25,7 +25,7 @@ const SuiviPage = () => {
     return (
         <div className="w-full h-full bg-background">
             <div className={`px-8 ${openModal ? 'blur-sm ' : ''}`}>
-                <div className="flex flex-row justify-between py-4">
+                <div className="flex flex-col-reverse md:flex-row justify-between py-4">
                     <h1 className="underline text-2xl">Mes suivis</h1>
                     <Button type="button" className="bg-purple" onClick={() => setOpenModal(true)} >
                         Ajouter un suivi
@@ -39,17 +39,17 @@ const SuiviPage = () => {
                         <RefreshButton />
                     </div>
                 </div>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap gap-4">
                     {/*  TODO : boucler sur tout les suivis existants */}
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
-                    <SuiviCard href="/suivi/1" className="w-60 m-4" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
                 </div>
             </div>
             {openModal &&  <Modal  title="Créer un suivi"inputList={inputList} buttonText="Ajouter l'étudiant" open={openModal} onClose={() => setOpenModal(false)} />}

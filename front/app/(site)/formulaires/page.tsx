@@ -7,7 +7,7 @@ const FormsPage = () => {
     return (
         <div className="w-full h-full bg-background">
             <div className="px-8">
-                <div className="flex flex-row justify-between py-4">
+                <div className="flex flex-col-reverse md:flex-row justify-between py-4">
                     <h1 className="underline text-2xl">Mes formulaires</h1>
                     <Button type="button" className="bg-purple">
                         Ajouter un formulaire
@@ -23,17 +23,17 @@ const FormsPage = () => {
                     </div>
                 </div>
                 {/* TODO : boucler sur tout les formulaires existants*/}
-                <div className="flex flex-wrap">
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-80 m-4"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-80 m-4"/>
+                <div className="flex flex-wrap gap-4 w-full">
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
                 </div>
             </div>
         </div>

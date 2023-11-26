@@ -20,7 +20,7 @@ const Modal = ({ title, inputList, buttonText, open, onClose }: ModalProps) => {
     return (
         <div>
             <div className={`fixed inset-0`} onClick={onClose}></div>
-            <div className='fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white px-16 py-8 flex flex-col rounded-xl' onClick={(e) => {
+            <div className='fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white flex flex-col rounded-xl' onClick={(e) => {
                 e.stopPropagation()
             }}>
                 <Button type="button" className="bg-purple " onClick={onClose}>

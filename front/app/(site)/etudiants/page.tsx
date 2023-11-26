@@ -29,7 +29,7 @@ const StudentsPage = () => {
     return (
         <div className="w-full h-full bg-background">
             <div className="px-8">
-                <div className="flex flex-row justify-between py-4">
+                <div className="flex flex-col-reverse md:flex-row justify-between py-4">
                     <h1 className="underline text-2xl">Liste des étudiants</h1>
                     <Button type="button" className="bg-purple" onClick={() => setOpen(!open)}>
                         {open ? 'Fermer' : 'Ajouter un étudiant'}
@@ -44,7 +44,7 @@ const StudentsPage = () => {
                             <RefreshButton/>
                         </div>
                     </div>
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap gap-4">
                         <StudentsList />
                     </div>
                 </div>

@@ -1,47 +1,41 @@
 "use client"
 
+import React from 'react';
 
 interface InputProps {
     type: string;
-    placeholder: string;
-    className: string;
-    inputValue: any;
-    setInputValue: (newInputValue:any)=>void;
+    className?: string;
+    placeholder?: string;
 }
 
-const Input = ({ placeholder, type, className, inputValue, setInputValue }: InputProps) => {
-
-    return (
-        <div className="flex items-center justify-center mt-6 w-full">
-        <div className={`
-                relative
-                ${className}
-            `}>
-            <input
-            id={`${placeholder}`}
-            name={`${placeholder}`}
-            value={inputValue}
-            onChange={(e) => {setInputValue(e.target.value)}}
-            type={type}
-            className={`
-                border-b 
-                border-gray-300 
-                py-1 
-                focus:border-b-2 
-                focus:border-purple 
-                transition-colors 
-                focus:outline-none 
-                peer 
-                bg-inherit
-                w-full
-                `}
-            />
-            <label htmlFor={`${placeholder}`}
-            className={`absolute left-0 top-1 cursor-text ${inputValue == '' ? "peer-focus:text-xs" : "text-xs"} ${inputValue == '' ? "peer-focus:-top-4" : "-top-4"} ${inputValue == '' ? "peer-focus:text-purple" : "text-purple"} transition-all `}
-            >{placeholder}</label>
-        </div>
-        </div>
-    );
-};
+const Input = ({ placeholder, className, type }: InputProps) => {
+    {
+        return (
+            <div className="">
+                <input
+                    type={type}
+                    className={`
+                        relative 
+                        bg-gray-50ring-0 
+                        outline-none 
+                        border 
+                        border-neutral-500 
+                        text-neutral-900 
+                        placeholder-black-700 
+                        text-sm 
+                        rounded-lg 
+                        focus:ring-black-500 
+                        focus:border-black-500 
+                        block 
+                        w-64 
+                        p-2.5 
+                        checked:bg-emerald-500
+                        ${className}
+                    `}
+                    placeholder={placeholder} />
+            </div>
+        )
+    }
+}
 
 export default Input;

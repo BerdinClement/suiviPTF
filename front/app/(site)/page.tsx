@@ -117,37 +117,41 @@ const history = [
 
 export default function Home() {
   return (
-    <div className="w-full flex flew-wrap ">
-      <div className="w-4/12 ">
+    <div className="w-full flex gap-2 flex-col-reverse md:flex-row">
+
+      <div className="md:w-3/12 ">
         <h1 className="text-2xl p-6 font-bold">Mes formulaires</h1>
-        {
-          forms.map((form, index) => {
-            return (
-              <FormCard title={form.title} id={form.id} date={form.date} className="m-4 h-28 " />
-            )
-          })
-        }
-      </div>
-      <div className="w-5/12">
-      <h1 className="text-2xl p-6 font-bold">Mes raccourcis</h1>
-        <div className=" sm:grid sm:grid-cols-2 xl:gap-6 ">
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-        </div>
-        <div className="h-full flex-1 py-10 hidden md:block flex flex-col">
-          <Hello />
-          <Divider />
-          <p className="text-[1.8vw]">Historique</p>
+        <div className="flex flex-col gap-4">
           {
-            history.map((history, index) => {
+            forms.map((form, index) => {
               return (
-                <HistoryCard date={history.date} className="p-2 m-2" title={history.title} content={history.content} />
+                <FormCard title={form.title} id={form.id} date={form.date} className="h-28" />
               )
             })
           }
         </div>
+      </div>
+
+      <div className="w-full md:w-5/12">
+        <h1 className="text-2xl p-6 font-bold">Mes raccourcis</h1>
+        <div className="flex justify-around sm:grid sm:grid-cols-2 xl:gap-6 ">
+          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
+          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
+          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
+          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
+        </div>
+      </div>
+      <div className="h-full flex-1 px-2 py-10 hidden md:block flex flex-col">
+        <Hello />
+        <Divider />
+        <p className="text-[1.8vw]">Historique</p>
+        {
+          history.map((history, index) => {
+            return (
+              <HistoryCard key={index} date={history.date} className="p-2 m-2" title={history.title} content={history.content} />
+            )
+          })
+        }
       </div>
     </div>
   )
