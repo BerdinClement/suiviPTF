@@ -2,9 +2,7 @@ import FormCard from "@/components/FormCard"
 import Hello from "@/components/Hello"
 import HistoryCard from "@/components/HistoryCard"
 import ShortCutCard from "@/components/ShortCutCard"
-import { UserContext } from "@/context/userContext"
 import { Divider } from "antd"
-import { useContext } from "react"
 
 const forms = [
   {
@@ -63,55 +61,6 @@ const history = [
     title: "Titre 3",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
-  },
-  {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
   }
 ]
 

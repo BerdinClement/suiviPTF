@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { login } from "@/services/auth";
 import { UserContext } from "@/context/userContext"
 import { useRouter } from "next/navigation"
+import { message } from "antd";
 
 export default function Login() {
 
@@ -18,6 +19,8 @@ export default function Login() {
 	const [rememberMe, setRememberMe] = useState(false);
 	const router = useRouter();
 
+	const [messageApi, contextHolder] = message.useMessage();
+
 	if(user){
 		router.push('/');
 	}
@@ -25,6 +28,12 @@ export default function Login() {
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		const user = await login(email, password);
+		if (user.token === undefined) {
+			messageApi.error("Email ou mot de passe incorrect");
+			setEmail("");
+			setPassword("");
+			return;
+		}
 		setUser(user);
 		router.push('/');
 
@@ -35,6 +44,7 @@ export default function Login() {
 
 	return (
 		<div className="w-full h-full bg-back_login flex justify-center items-center">
+			{contextHolder}
 			<div className="flex w-11/12 h-5/6 rounded-[37px] bg-blue_login flex m-auto p-3">
 
 				<div className="hidden relative lg:block w-[700px] h-full m-auto">
