@@ -17,7 +17,7 @@ const Header = ({ children }: HeaderProps) => {
         <div className='flex flex-col h-full'>
             <Breadcrumb
                 separator=">"
-                className='py-4 text-[20px]'
+                className='py-4'
                 items={[
                     {
                         href: '/',
