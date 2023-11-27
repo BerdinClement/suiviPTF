@@ -5,6 +5,7 @@ interface InputProps {
   placeholder: string;
   className: string;
   inputValue: any;
+  required?: boolean;
   setInputValue: (newInputValue: any) => void;
 }
 
@@ -13,6 +14,7 @@ const InputLogin = ({
   type,
   className,
   inputValue,
+  required,
   setInputValue,
 }: InputProps) => {
   return (
@@ -27,6 +29,8 @@ const InputLogin = ({
           id={`${placeholder}`}
           name={`${placeholder}`}
           value={inputValue}
+          required={required}
+
           onChange={(e) => {
             setInputValue(e.target.value);
           }}
