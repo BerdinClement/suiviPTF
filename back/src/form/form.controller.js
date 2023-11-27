@@ -81,7 +81,6 @@ const formController = {
             }
         }).then((form) => {
             if (form) {
-                logger.info(`${req.method} ${req.originalUrl} ${form.questions}`)
                 res.status(200).json(form)
             } else {
                 res.status(204).json({ message: 'Form not found' })

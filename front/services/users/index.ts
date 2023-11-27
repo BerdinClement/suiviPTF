@@ -76,17 +76,17 @@ export async function createStudent(email: string, password: string, firstName: 
     url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/student`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + token,
+      'Authorization': 'Bearer ' + token,
     },
     data: data
   };
 
   const res = await axios.request(config)
     .then((response: any) => {
-      return response.data;
+      return {status: true, data: response.data};
     })
     .catch((error: Error) => {
-      return error;
+      return {status: false, data: error};
     });
 
   return res;
@@ -111,7 +111,7 @@ export async function createTutor(email: string, password: string, firstName: st
     url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/tutor`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + token,
+      'Authorization': 'Bearer ' + token,
     },
     data: data
   };

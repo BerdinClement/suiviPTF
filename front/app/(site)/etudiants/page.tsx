@@ -78,17 +78,31 @@ const StudentsPage = () => {
       const res = await createStudent(
         email,
         password,
-        ine,
-        studentNumber,
-        lastName,
         firstName,
+        lastName,
+        ine,
+        studentNumber
       );
+
+      if (!res.status) {
+        messageApi.open({
+          type: 'error',
+          content: 'Une erreur est survenue lors de la création de l\'étudiant ! ',
+        });
+        setEmail("");
+        setPassword("");
+        setIne("");
+        setStudentNumber("");
+        setLastName("");
+        setFirstName("");
+        setOpenModal(false);
+        return;
+      }
 
       messageApi.open({
         type: 'success',
         content: 'L\'étudiant a bien été créé ! ',
       });
-
       setEmail("");
       setPassword("");
       setIne("");
@@ -96,9 +110,10 @@ const StudentsPage = () => {
       setLastName("");
       setFirstName("");
       setOpenModal(false);
-      
+
+
     } catch (error) {
-      
+
     }
   };
 
