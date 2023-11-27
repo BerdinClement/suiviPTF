@@ -12,6 +12,7 @@ export async function login(email: string, password: string) {
         url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/login`,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         data: data
     };
@@ -39,7 +40,9 @@ export async function logout() {
     const data = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/logout`, {}, {
 
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
         withCredentials: true,
     })
@@ -69,7 +72,8 @@ export async function getProfile() {
         url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/profile`,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token,
+            'Access-Control-Allow-Origin': '*'
         },
         withCredentials: true,
     };

@@ -11,6 +11,8 @@ export async function getAllStudents() {
         url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/student`,
         headers: {
             'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         }
     };
 
