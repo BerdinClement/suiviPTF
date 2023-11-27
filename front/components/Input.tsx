@@ -6,9 +6,11 @@ interface InputProps {
     type: string;
     className?: string;
     placeholder?: string;
+    pattern?: string;
+    required?: boolean;
 }
 
-const Input = ({ placeholder, className, type }: InputProps) => {
+const Input = ({ placeholder, className, type, pattern, required }: InputProps) => {
     {
         return (
             <div className="">
@@ -32,7 +34,10 @@ const Input = ({ placeholder, className, type }: InputProps) => {
                         checked:bg-emerald-500
                         ${className}
                     `}
-                    placeholder={placeholder} />
+                    placeholder={placeholder}
+                    pattern={pattern}
+                    required={required}
+                />
             </div>
         )
     }
