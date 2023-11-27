@@ -61,7 +61,7 @@ const formController = {
     },
     getUserResponseByForm: async (req, res) => {
         const {id} = req.params;
-        const token = req.cookies.token
+        const token = req.headers.authorization.split(' ')[1].replace(/"/g, '');
         if (!token) {
             logger.error(`${req.method} ${req.originalUrl} Unauthorized`)
             res.status(401).json({error: "Unauthorized"})

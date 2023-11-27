@@ -2,6 +2,7 @@ import FormCard from "@/components/FormCard";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import RefreshButton from "@/components/RefreshButton";
+import FormsList from "./FormsList";
 
 const FormsPage = () => {
     return (
@@ -24,16 +25,7 @@ const FormsPage = () => {
                 </div>
                 {/* TODO : boucler sur tout les formulaires existants*/}
                 <div className="flex flex-wrap gap-4 w-full">
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire" date="21/11/2023" id="1" className="w-full md:w-80"/>
-                    <FormCard title="Formulaire4" date="21/11/2023" id="1" className="w-full md:w-80"/>
+                    <FormsList/>
                 </div>
             </div>
         </div>

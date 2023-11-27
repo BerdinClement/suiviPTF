@@ -34,6 +34,7 @@ const studentSchema = new mongoose.Schema({
 const formSchema = new mongoose.Schema({
     title: String,
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+    date: Date,
 }, {
     timestamps: true
 });
