@@ -15,22 +15,22 @@ const ProfilPage = () => {
   const { user } = useContext(UserContext);
   return (
     <div className="bg-background h-full">
-      <FormOutlined className="p-2 m-2 md:text-[30px] opacity-40 float-right" />
+      <FormOutlined className="p-2 m-2 text-[20px] opacity-40 float-right" />
       <div className="flex items-center">
-        <div className="ml-40">
+        <div className="hidden md:block ml-40">
           <Hello />
         </div>
-        <div className="ml-36 w-2/3">
+        <div className="p-4 md:ml-36">
           <h3 className="text-4xl mb-4">
             {user.user.lastName + " " + user.user.firstName}
           </h3>
-          <div className="flex">
-            <div className="w-1/2 pr-4">
-              <h1 className="text-lg underline mb-4">{user.user.email}</h1>
+          <div className="flex flex-col md:flex-row gap-2">
+            <div className="pr-4">
+              <h1 className="text-lg underline md:mb-4">{user.user.email}</h1>
               <h1 className="text-lg">INE : {user.user.student.ine}</h1>
             </div>
-            <div className="w-1/2">
-              <h1 className="mb-4 text-lg">
+            <div className="">
+              <h1 className="md:mb-4 text-lg">
                 Tuteur : {user.user.student.tutor}
               </h1>
               <h1 className="text-lg">
@@ -41,7 +41,7 @@ const ProfilPage = () => {
         </div>
       </div>
       <Divider />
-      <div className="flex items-center justify-around p-[5%]">
+      <div className="flex flex-col-reverse md:flex-row gap-4 items-center justify-around p-[5%]">
         <div className="bg-background w-full max-w-[400px] bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl text-center font-bold text-gray-800 mb-4">
             Changer mon mot de passe
@@ -71,7 +71,7 @@ const ProfilPage = () => {
         </div>
         <Link
           href="mailto:noa.watel@gmail.com"
-          className="rounded-full text-center bg-slate-700 w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
+          className="rounded-full text-center bg-slate-700 md:w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
         >
           Envoyer un mail à : blabla
         </Link>
