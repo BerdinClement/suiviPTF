@@ -41,7 +41,7 @@ export default function FormPage({ params }: { params: { id: string } }) {
         {
             key: '2',
             label: 'Date',
-            children: form.date,
+            children: new Date(form.date).toLocaleDateString('fr-FR'),
         },
     ];
 

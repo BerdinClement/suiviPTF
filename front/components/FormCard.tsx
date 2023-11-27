@@ -23,7 +23,7 @@ const FormCard = ({ title, date, id, className }: FormCardProps) => {
             <div className="flex flex-1 bg-white p-2 rounded-lg opacity-90">
                 <div className="flex flex-col gap-4 p-2">
                     <h1 className="text-xl">{title}</h1>
-                    <h3 className="text-sm italic">{date}</h3>
+                    <h3 className="text-sm italic">{new Date(date).toLocaleDateString('fr-FR')}</h3>
                 </div>
             </div>
         </Link>
