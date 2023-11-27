@@ -8,9 +8,11 @@ interface InputProps {
     placeholder?: string;
     pattern?: string;
     required?: boolean;
+    value: string;
+    setValue: (value: string) => void;
 }
 
-const Input = ({ placeholder, className, type, pattern, required }: InputProps) => {
+const Input = ({ placeholder, className, type, pattern, required, value, setValue }: InputProps) => {
     {
         return (
             <div className="">
@@ -37,6 +39,8 @@ const Input = ({ placeholder, className, type, pattern, required }: InputProps) 
                     placeholder={placeholder}
                     pattern={pattern}
                     required={required}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                 />
             </div>
         )
