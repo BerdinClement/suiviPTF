@@ -27,15 +27,21 @@ const ProfilPage = () => {
           <div className="flex flex-col md:flex-row gap-2">
             <div className="pr-4">
               <h1 className="text-lg underline md:mb-4">{user.user.email}</h1>
-              <h1 className="text-lg">INE : {user.user.student.ine}</h1>
+              {user.user.student && (
+                <h1 className="text-lg">INE : {user.user.student.ine}</h1>
+              )}
             </div>
             <div className="">
-              <h1 className="md:mb-4 text-lg">
-                Tuteur : {user.user.student.tutor}
-              </h1>
-              <h1 className="text-lg">
-                N°Étudiant : {user.user.student.num_etu}
-              </h1>
+              {user.user.student && (
+                <h1 className="md:mb-4 text-lg">
+                  Tuteur : {user.user.student.tutor}
+                </h1>
+              )}
+              {user.user.student && (
+                <h1 className="text-lg">
+                  N°Étudiant : {user.user.student.num_etu}
+                </h1>
+              )}
             </div>
           </div>
         </div>
