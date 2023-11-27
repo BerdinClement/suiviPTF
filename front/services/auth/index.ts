@@ -83,7 +83,7 @@ export async function getProfile() {
             return response.data;
         })
         .catch((error: Error) => {
-            console.log(error);
+            return error;
         });
 
     return user;
