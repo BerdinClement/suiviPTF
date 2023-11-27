@@ -1,6 +1,5 @@
 'use client'
 
-import FormCard from "@/components/FormCard";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import RefreshButton from "@/components/RefreshButton";
@@ -25,11 +24,11 @@ const FormsPage = () => {
                     </Button>
                 </div>
                 <div className="flex flex-row justify-between pb-8">
-                    <div className="flex">
+                    <div className="flex flex-col gap-4 md:flex-row">
                         <Input type="text" placeholder="Titre : ..." className="mr-8"></Input>
                         <Input type="date" placeholder="Date : ..." className="mr-8"></Input>
                     </div>
-                    <div className="flex">
+                    <div className="sm:flex hidden">
                         <RefreshButton/>
                     </div>
                 </div>
