@@ -65,7 +65,7 @@ const usersController = {
     },
     login: async (req, res) => {
         const { email, password } = req.body;
-        User.findOne({ email }).then((user) => {
+        User.findOne({ email }).populate('student').then((user) => {
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             } else {
@@ -94,7 +94,7 @@ const usersController = {
         if(token){
             jwt.verify(token, jwtSecret, {}, async (err, userData) => {
                 if(err) throw err
-                const user = await User.findById(userData._id)
+                const user = await User.findById(userData._id).populate('student')
                 user.password = undefined
                 res.json({token, user})
             })
