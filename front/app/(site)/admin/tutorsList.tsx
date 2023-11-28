@@ -46,6 +46,7 @@ const TutorsList = ({ activeName, setActiveName }: TutorListProps) => {
               key={index}
               year={"2002"}
               className="w-full md:w-80"
+              isTutor={true}
             />
           )
         }
