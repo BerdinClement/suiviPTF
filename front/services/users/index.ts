@@ -102,6 +102,7 @@ export async function createTutor(email: string, password: string, firstName: st
     "password": password,
     "firstName": firstName,
     "lastName": lastName,
+    "isAdmin": true,
     "tutor": {}
   });
 
@@ -118,10 +119,10 @@ export async function createTutor(email: string, password: string, firstName: st
 
   const res = await axios.request(config)
     .then((response: any) => {
-      return response.data;
+      return {status: true, data: response.data};
     })
     .catch((error: Error) => {
-      return error;
+      return {status: false, data: error};
     });
 
   return res;

@@ -8,38 +8,77 @@ import Modal from "@/components/Modal";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
 import TutorsList from "./tutorsList";
+import { createTutor } from "@/services/users";
+import { message } from "antd";
 
 const AdminPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(UserContext);
+
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const inputStudent = [
     {
       label: "Nom",
       placeholder: "Nom : ...",
       type: "text",
+      value: nom,
+      setValue: setNom,
     },
     {
       label: "Prénom",
       placeholder: "Prénom : ...",
       type: "text",
+      value: prenom,
+      setValue: setPrenom,
     },
     {
       label: "E-Mail",
       placeholder: "E-Mail : ...",
       type: "email",
-      pattern: ".+@etu.univ-littoral.fr",
+      pattern: ".+@univ-littoral.fr",
       required: true,
+      value: email,
+      setValue: setEmail,
     },
     {
       label: "Mot de passe",
       placeholder: "Mot de passe : ...",
       type: "password",
       required: true,
+      value: password,
+      setValue: setPassword,
     },
   ];
 
+  const reset = () => {
+    setOpenModal(false);
+    setNom("");
+    setPrenom("");
+    setEmail("");
+    setPassword("");
+  }
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const res = await createTutor(email, password, prenom, nom);
+    if(!res.status){
+      reset();
+      messageApi.error("Une erreur est survenue lors de la création du tuteur");
+      return;
+    }
+    reset();
+    messageApi.success("Le tuteur a bien été créé");
+  }
+
   return (
     <div className="w-full h-full bg-background">
+      {contextHolder}
       <div className={`${openModal ? "blur-sm " : ""} px-8 `}>
         <div className="flex flex-col-reverse md:flex-row justify-between py-4">
           <h1 className="underline text-2xl">Liste des tuteurs</h1>
@@ -80,7 +119,7 @@ const AdminPage = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               Créer un tuteur
             </h2>
-            <form className="flex flex-col">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
               {inputStudent.map((input, index) => (
                 <Input
                   type={input.type}
@@ -89,6 +128,8 @@ const AdminPage = () => {
                   pattern={input.pattern}
                   required={input.required}
                   key={index}
+                  value={input.value}
+                  setValue={input.setValue}
                 ></Input>
               ))}
               <div className="flex justify-center pt-6">
