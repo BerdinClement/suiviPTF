@@ -20,7 +20,7 @@ const Dropdown = ({ className, options }: DropdownProps) => {
                     text-neutral-900 
                     placeholder-black-700 
                     text-sm 
-                    rounded-lg 
+                    rounded-lg
                     focus:ring-black-500 
                     focus:border-black-500 
                     block 

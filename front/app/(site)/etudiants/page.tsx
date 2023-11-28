@@ -3,13 +3,14 @@
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import RefreshButton from "@/components/RefreshButton";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import StudentsList from "./studentsList";
 import Modal from "@/components/Modal";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
-import { createStudent } from "@/services/users";
+import {createStudent, getAllTutors} from "@/services/users";
 import { message } from "antd";
+import Dropdown from "@/components/Dropdown";
 
 const StudentsPage = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -21,6 +22,9 @@ const StudentsPage = () => {
   const [studentNumber, setStudentNumber] = useState("");
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [studentTutor, setStudentTutor] = useState("");
+
+  const [tutors, setTutors] = useState([]);
 
   const inputStudent = [
     {
@@ -71,6 +75,18 @@ const StudentsPage = () => {
   ];
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    const fetchTutors = async () => {
+      const res = await getAllTutors();
+      setTutors(res);
+    };
+    fetchTutors();
+  }, []);
+
+  if (!tutors) {
+    return <div>Chargement...</div>;
+  }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -178,6 +194,8 @@ const StudentsPage = () => {
                 ></Input>
               ))}
               <div className="flex justify-center pt-6">
+                <Dropdown className="" options={tutors}></Dropdown>
+
                 <Button type="submit" className="bg-slate-700 w-10/12">
                   Ajouter un étudiant
                 </Button>
