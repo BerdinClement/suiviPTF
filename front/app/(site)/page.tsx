@@ -87,7 +87,7 @@ export default function Home() {
           {
             forms.map((form: Form, index) => {
               return (
-                <FormCard title={form.title} id={form._id} date={form.date} className="h-28" />
+                <FormCard key={index} title={form.title} id={form._id} date={form.date} className="h-28" />
               )
             })
           }
@@ -100,7 +100,7 @@ export default function Home() {
           {SHORTCUT_LINKS.map((link, index) => {
             if (role.includes(link.restricted)) {
               return (
-                <ShortCutCard href={link.href} label={link.label} icon={link.icon} className="" />
+                <ShortCutCard key={index} href={link.href} label={link.label} icon={link.icon} className="" />
               )
             }
           })}
