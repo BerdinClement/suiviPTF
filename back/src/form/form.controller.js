@@ -26,8 +26,8 @@ const formController = {
         })
     },
     create: async (req, res) => {
-        const { title } = req.body
-        const newForm = new Form({title})
+        const { title, date } = req.body
+        const newForm = new Form({title, date})
         newForm.save().then((form) => {
             res.status(201).json(form)
         }).catch((err) => {
@@ -80,6 +80,18 @@ const formController = {
                 }
             }
         }).then((form) => {
+            if (form) {
+                res.status(200).json(form)
+            } else {
+                res.status(204).json({ message: 'Form not found' })
+            }
+        }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
+            res.status(404).json(err)
+        })
+    },
+    getLast : async (req, res) => {
+        Form.find().sort({date: -1}).limit(1).then((form) => {
             if (form) {
                 res.status(200).json(form)
             } else {

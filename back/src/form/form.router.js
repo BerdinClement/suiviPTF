@@ -7,6 +7,8 @@ const isStudent = require("../middleware/isStudent");
 
 router.get('/',[isConnected], formController.getAll);
 
+router.get('/last', [isConnected], formController.getLast);
+
 router.get('/:id',[isConnected], formController.getOne);
 
 router.patch('/:id', [isConnected, isAdmin], formController.update);

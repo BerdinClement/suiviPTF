@@ -7,35 +7,8 @@ import ShortCutCard from "@/components/ShortCutCard"
 import { Divider } from "antd"
 import { RESTRICTED, SHORTCUT_LINKS } from "@/constants";
 import { UserContext } from "@/context/userContext";
-import {useContext} from "react";
-
-const forms = [
-  {
-    id: "1",
-    title: "Formulaire 1",
-    date: "12/12/2021",
-  },
-  {
-    id: "2",
-    title: "Formulaire 2",
-    date: "12/12/2021",
-  },
-  {
-    id: "3",
-    title: "Formulaire 3",
-    date: "12/12/2021",
-  },
-  {
-    id: "4",
-    title: "Formulaire 4",
-    date: "12/12/2021",
-  },
-  {
-    id: "5",
-    title: "Formulaire 5",
-    date: "12/12/2021",
-  },
-]
+import { useContext, useEffect, useState } from "react";
+import { getLast } from "@/services/forms";
 
 const history = [
   {
@@ -69,9 +42,30 @@ const history = [
   }
 ]
 
+interface Form {
+  _id: string;
+  title: string;
+  date: string;
+}
+
 export default function Home() {
 
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
+
+  const [forms, setForms] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const res = await getLast();
+      setForms(res);
+    };
+    fetchStudents();
+    
+  }, []);
+
+  if (!forms) {
+    return <div>Chargement...</div>;
+  }
 
   var role = [RESTRICTED.ALL];
   if (user.user.student) {
@@ -91,9 +85,9 @@ export default function Home() {
         <h1 className="text-2xl p-6 font-bold">Mes formulaires</h1>
         <div className="flex flex-col gap-4">
           {
-            forms.map((form, index) => {
+            forms.map((form: Form, index) => {
               return (
-                <FormCard title={form.title} id={form.id} date={form.date} className="h-28" />
+                <FormCard title={form.title} id={form._id} date={form.date} className="h-28" />
               )
             })
           }
