@@ -75,12 +75,14 @@ const ProfilPage = () => {
             </div>
           </form>
         </div>
-        <Link
-          href="mailto:noa.watel@gmail.com"
-          className="rounded-full text-center bg-slate-700 md:w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
-        >
-          Envoyer un mail à : blabla
-        </Link>
+        {user.user.student && (
+          <Link
+            href="mailto:noa.watel@gmail.com"
+            className="rounded-full text-center bg-slate-700 md:w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
+          >
+            Envoyer un mail à : blabla
+          </Link>
+        )}
       </div>
     </div>
   );
