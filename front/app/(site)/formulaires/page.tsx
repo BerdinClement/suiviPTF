@@ -60,7 +60,7 @@ const FormsPage = () => {
                     </Button>
                 </div>
                 <div className="flex flex-row justify-between pb-8">
-                    <div className="flex">
+                    <div className="flex flex-col md:flex-row gap-2 md:flex">
                         <Input
                             type="text"
                             placeholder="Titre : ..."
@@ -74,7 +74,7 @@ const FormsPage = () => {
                             className="mr-8"
                         ></Input>
                     </div>
-                    <div className="flex">
+                    <div className="hidden sm:flex">
                         <RefreshButton />
                     </div>
                 </div>
