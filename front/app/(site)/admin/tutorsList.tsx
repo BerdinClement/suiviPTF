@@ -35,7 +35,9 @@ const TutorsList = ({ activeName, setActiveName }: TutorListProps) => {
   return (
     <>
       {tutors.map((tutor: Tutor, index) => {
-        if (activeName === "" || tutor.user.lastName.includes(activeName) ) {
+        activeName = activeName.toLowerCase();
+        const lastName = tutor.user.lastName.toLowerCase();
+        if (activeName === "" || lastName.includes(activeName) ) {
           return (
             <StudentCard
               name={`${tutor.user.firstName} ${tutor.user.lastName}`}
