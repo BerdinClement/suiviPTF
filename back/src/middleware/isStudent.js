@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const Logger = require('../utils/Logger');
+const Logger = require('../utils/logger');
 const logger = Logger.getInstance();
 
 isStudent = (req, res, next) => {
