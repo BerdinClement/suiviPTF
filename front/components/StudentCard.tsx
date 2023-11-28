@@ -1,6 +1,6 @@
 "use client"
 
-import { UserOutlined, SolutionOutlined } from '@ant-design/icons';
+import {UserOutlined, SolutionOutlined, DesktopOutlined} from '@ant-design/icons';
 import React from 'react';
 
 interface StudentCardProps {
@@ -19,11 +19,14 @@ const StudentCard = ({ name, email, year, className }: StudentCardProps) => {
                 <h3>{email}</h3>
                 <h3>{year}</h3>
                 <div className="flex flex-row justify-around pt-4 text-2xl ">
-                    <div className="cursor-pointer hover:text-3xl">
+                    <div className="cursor-pointer hover:shadow-sm">
                         <UserOutlined />
                     </div>
-                    <div className="cursor-pointer hover:text-3xl">
+                    <div className="cursor-pointer hover:shadow-sm">
                         <SolutionOutlined />
+                    </div>
+                    <div className="cursor-pointer hover:shadow-sm">
+                        <DesktopOutlined />
                     </div>
                 </div>
             </div>

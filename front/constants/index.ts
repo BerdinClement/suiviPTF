@@ -15,3 +15,11 @@ export const SIDEBAR_LINKS = [
     { href: '/etudiants', key: 'etudiants', label: 'Liste des étudiants', icon: TeamOutlined, restricted: RESTRICTED.TUTOR },
     { href: '/profil', key: 'profil', label: 'Profil', icon: UserOutlined, restricted: RESTRICTED.ALL },
 ]
+
+export const SHORTCUT_LINKS = [
+    { href: '/admin', key: 'admin', label: 'Administation', icon: LockOutlined, restricted: RESTRICTED.ADMIN },
+    { href: '/formulaires', key: 'formulaires', label: 'Formulaires', icon: FileTextOutlined, restricted: RESTRICTED.ALL },
+    { href: '/suivi', key: 'Suivi', label: 'Suivi', icon: DesktopOutlined, restricted: RESTRICTED.STUDENT },
+    { href: '/etudiants', key: 'etudiants', label: 'Liste des étudiants', icon: TeamOutlined, restricted: RESTRICTED.TUTOR },
+    { href: '/profil', key: 'profil', label: 'Profil', icon: UserOutlined, restricted: RESTRICTED.ALL },
+]

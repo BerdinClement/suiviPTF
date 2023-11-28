@@ -1,8 +1,13 @@
+"use client";
+
 import FormCard from "@/components/FormCard"
 import Hello from "@/components/Hello"
 import HistoryCard from "@/components/HistoryCard"
 import ShortCutCard from "@/components/ShortCutCard"
 import { Divider } from "antd"
+import { RESTRICTED, SHORTCUT_LINKS } from "@/constants";
+import { UserContext } from "@/context/userContext";
+import {useContext} from "react";
 
 const forms = [
   {
@@ -65,6 +70,20 @@ const history = [
 ]
 
 export default function Home() {
+
+  const {user} = useContext(UserContext);
+
+  var role = [RESTRICTED.ALL];
+  if (user.user.student) {
+    role.push(RESTRICTED.STUDENT);
+  }
+  if (user.user.tutor) {
+    role.push(RESTRICTED.TUTOR);
+  }
+  if (user.user.isAdmin) {
+    role.push(RESTRICTED.ADMIN);
+  }
+
   return (
     <div className="w-full flex gap-2 flex-col-reverse md:flex-row">
 
@@ -84,10 +103,13 @@ export default function Home() {
       <div className="w-full md:w-5/12">
         <h1 className="text-2xl p-6 font-bold">Mes raccourcis</h1>
         <div className="flex justify-around sm:grid sm:grid-cols-2 xl:gap-6 ">
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
-          <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
+          {SHORTCUT_LINKS.map((link, index) => {
+            if (role.includes(link.restricted)) {
+              return (
+                <ShortCutCard href={link.href} label={link.label} icon={link.icon} className="" />
+              )
+            }
+          })}
         </div>
       </div>
       <div className="h-full flex-1 px-2 pt-10 hidden md:block flex flex-col">

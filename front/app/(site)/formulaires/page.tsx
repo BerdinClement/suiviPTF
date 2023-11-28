@@ -61,7 +61,7 @@ const FormsPage = () => {
                                                 style={{ width: '100%' }}
                                                 rules={[{ required: true, message: ' Veuillez poser une question ou la supprimer'}]}
                                             >
-                                                <Input className="w-fit" type="text" placeholder={`Question n°${key+1}`} />
+                                                <Input className="w-[40.7rem]" type="text" placeholder={`Question n°${key+1}`} />
                                             </Form.Item>
                                             <MinusCircleOutlined onClick={() => remove(name)} />
                                         </Space>
