@@ -4,7 +4,20 @@ import StudentCard from "@/components/StudentCard";
 import { getAllTutors } from "@/services/users";
 import { useEffect, useState } from "react";
 
-const TutorsList = () => {
+interface TutorListProps {
+  activeName: string;
+  setActiveName: (name: string) => void;
+}
+
+interface Tutor {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+}
+
+const TutorsList = ({ activeName, setActiveName }: TutorListProps) => {
   const [tutors, setTutors] = useState([]);
 
   useEffect(() => {
@@ -16,20 +29,24 @@ const TutorsList = () => {
   }, []);
 
   if (!tutors) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   return (
     <>
-      {tutors.map((tutor, index) => (
-        <StudentCard
-          name={`${tutor.user.firstName} ${tutor.user.lastName}`}
-          email={tutor.user.email}
-          key={index}
-          year={"2002"}
-          className="w-full md:w-80"
-        />
-      ))}
+      {tutors.map((tutor: Tutor, index) => {
+        if (activeName === "" || tutor.user.lastName.includes(activeName) ) {
+          return (
+            <StudentCard
+              name={`${tutor.user.firstName} ${tutor.user.lastName}`}
+              email={tutor.user.email}
+              key={index}
+              year={"2002"}
+              className="w-full md:w-80"
+            />
+          )
+        }
+      })}
     </>
   );
 };

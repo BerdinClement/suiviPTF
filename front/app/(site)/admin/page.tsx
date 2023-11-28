@@ -76,6 +76,8 @@ const AdminPage = () => {
     messageApi.success("Le tuteur a bien été créé");
   }
 
+  const [activeName, setActiveName] = useState("");
+
   return (
     <div className="w-full h-full bg-background">
       {contextHolder}
@@ -97,6 +99,8 @@ const AdminPage = () => {
                 type="text"
                 placeholder="Titre : ..."
                 className="mr-8"
+                value={activeName}
+                setValue={setActiveName}
               ></Input>
             </div>
             <div className="flex">
@@ -104,7 +108,7 @@ const AdminPage = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            <TutorsList />
+            <TutorsList activeName={activeName} setActiveName={setActiveName} />
           </div>
         </div>
       </div>
