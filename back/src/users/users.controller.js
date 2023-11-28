@@ -39,8 +39,8 @@ const usersController = {
         });
     },
     createTutor: async (req, res) => {
-        const {email, password, firstName, lastName, phone} = req.body
-        const newUser = new User({email, password, firstName, lastName, phone});
+        const {email, password, firstName, lastName, phone, isAdmin} = req.body
+        const newUser = new User({email, password, firstName, lastName, phone, isAdmin});
         newUser.password = await bcrypt.hashSync(newUser.password, bcryptSalt);
         newUser.save().then((user) => {
             const newTutor = new Tutor({
