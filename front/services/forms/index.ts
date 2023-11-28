@@ -50,10 +50,11 @@ export async function getFormById(id: string) {
     return form;
 }
 
-export async function createForm(title: string) {
+export async function createForm(title: string, questions: any, date: string) {
     const axios = require('axios');
     let data = JSON.stringify({
-        "title": title
+        "title": title,
+        "date": new Date(date),
     });
 
     const token = localStorage.getItem('token');
@@ -69,12 +70,47 @@ export async function createForm(title: string) {
         data: data
     };
 
-    const res = await axios.request(config)
+    let res = await axios.request(config)
         .then((response: any) => {
-            return {succes : true, data: response.data};
+            return { status: true, data: response.data };
         })
         .catch((error: Error) => {
-            return {succes : false, data: error};
+            return { status: false, data: error };
+        });
+
+    if (questions.length == 0) {
+        return res;
+    }
+
+    const questionsArray = questions.map((question: any) => {
+        return {
+            "text": question.last,
+            "type": "text",
+            "required": false,
+        }
+    });
+
+    data = JSON.stringify({
+        "questions": questionsArray,
+    });
+
+    config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/questions/many/${res.data._id}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+        data: data
+    };
+
+    res = await axios.request(config)
+        .then((response: any) => {
+            return { status: true, data: response.data };
+        })
+        .catch((error: Error) => {
+            return { status: false, data: error };
         });
 
     return res;

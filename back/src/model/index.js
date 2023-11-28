@@ -40,8 +40,8 @@ const formSchema = new mongoose.Schema({
 });
 
 const questionSchema = new mongoose.Schema({
-    text: String,
-    type: String,
+    text: {required: true, type: String},
+    type: {default: 'text', type: String, enum: ['text', 'number', 'date', 'checkbox', 'radio']},
     required: { type: Boolean, default: false },
     form: { type: mongoose.Schema.Types.ObjectId, ref: 'Form' },
     responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }]

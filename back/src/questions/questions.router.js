@@ -6,7 +6,7 @@ const isConnected = require("../middleware/isConnected");
 
 router.post('/:formId', [isConnected, isAdmin], questionsController.addQuestion);
 
-router.post('/:formId', [isConnected, isAdmin], questionsController.addManyQuestion);
+router.post('/many/:formId', [isConnected, isAdmin], questionsController.addManyQuestion);
 
 router.delete('/:id', [isConnected, isAdmin], questionsController.deleteQuestion);
 

@@ -26,8 +26,8 @@ const formController = {
         })
     },
     create: async (req, res) => {
-        const { title } = req.body
-        const newForm = new Form({title})
+        const { title, date } = req.body
+        const newForm = new Form({title, date})
         newForm.save().then((form) => {
             res.status(201).json(form)
         }).catch((err) => {
