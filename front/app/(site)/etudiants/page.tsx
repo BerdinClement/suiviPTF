@@ -86,8 +86,9 @@ const StudentsPage = () => {
 
       if (!res.status) {
         messageApi.open({
-          type: 'error',
-          content: 'Une erreur est survenue lors de la création de l\'étudiant ! ',
+          type: "error",
+          content:
+            "Une erreur est survenue lors de la création de l'étudiant ! ",
         });
         setEmail("");
         setPassword("");
@@ -100,8 +101,8 @@ const StudentsPage = () => {
       }
 
       messageApi.open({
-        type: 'success',
-        content: 'L\'étudiant a bien été créé ! ',
+        type: "success",
+        content: "L'étudiant a bien été créé ! ",
       });
       setEmail("");
       setPassword("");
@@ -110,12 +111,10 @@ const StudentsPage = () => {
       setLastName("");
       setFirstName("");
       setOpenModal(false);
-
-
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
+
+  const [activeName, setActiveName] = useState("");
 
   return (
     <div className="w-full h-full bg-background">
@@ -136,8 +135,10 @@ const StudentsPage = () => {
             <div className="flex">
               <Input
                 type="text"
-                placeholder="Titre : ..."
+                placeholder="Nom : ..."
                 className="mr-8"
+                value={activeName}
+                setValue={setActiveName}
               ></Input>
             </div>
             <div className="flex">
@@ -145,7 +146,10 @@ const StudentsPage = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            <StudentsList />
+            <StudentsList
+              activeName={activeName}
+              setActiveName={setActiveName}
+            />
           </div>
         </div>
       </div>
