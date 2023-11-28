@@ -90,7 +90,7 @@ export default function Home() {
           <ShortCutCard href="/suivi/creation" label="Créer un suivi" className="" />
         </div>
       </div>
-      <div className="h-full flex-1 px-2 py-10 hidden md:block flex flex-col">
+      <div className="h-full flex-1 px-2 pt-10 hidden md:block flex flex-col">
         <Hello />
         <Divider />
         <p className="text-[1.8vw]">Historique</p>
