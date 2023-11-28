@@ -13,8 +13,14 @@ import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
 
 const FormsPage = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const { user } = useContext(UserContext);
+    const [openModal, setOpenModal] = useState(false);
+    const { user } = useContext(UserContext);
+
+    const [title, setTitle] = useState("");
+
+    const handleSubmit = async (values: any) => {
+        console.log(values);
+    }
 
     return (
         <div className="w-full h-full bg-background">
@@ -31,27 +37,27 @@ const FormsPage = () => {
                         <Input type="date" placeholder="Date : ..." className="mr-8"></Input>
                     </div>
                     <div className="flex">
-                        <RefreshButton/>
+                        <RefreshButton />
                     </div>
                 </div>
                 {/* TODO : boucler sur tout les formulaires existants*/}
                 <div className="flex flex-wrap gap-4 w-full">
-                    <FormsList/>
+                    <FormsList />
                 </div>
             </div>
-            {openModal &&  <Modal  className="w-[700px]" buttonText="Ajouter l'étudiant" open={openModal} onClose={() => setOpenModal(false)}>
+            {openModal && <Modal className="w-[700px]" buttonText="Ajouter l'étudiant" open={openModal} onClose={() => setOpenModal(false)}>
                 <div className="bg-background w-full max-w-[700px] bg-white rounded-lg shadow-md p-6 ">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">Créer un formulaire</h2>
                     <Form
                         name="dynamic_form_nest_item"
                         autoComplete="off"
                         layout="vertical"
-
+                        onFinish={handleSubmit}
                     >
                         <Form.List name="users">
                             {(fields, { add, remove }) => (
                                 <>
-                                    <Input className="w-full" type="text" placeholder="Titre ..." />
+                                    <Input value={title} setValue={setTitle} className="w-full" type="text" placeholder="Titre ..." />
 
                                     {fields.map(({ key, name, ...restField }) => (
                                         <Space key={key} style={{ display: 'flex', width: '100%' }} align="baseline">
@@ -59,9 +65,8 @@ const FormsPage = () => {
                                                 {...restField}
                                                 name={[name, 'last']}
                                                 style={{ width: '100%' }}
-                                                rules={[{ required: true, message: ' Veuillez poser une question ou la supprimer'}]}
                                             >
-                                                <Input className="w-[40.7rem]" type="text" placeholder={`Question n°${key+1}`} />
+                                                <Input className="w-[40.7rem]" type="text" placeholder={`Question n°${key + 1}`} />
                                             </Form.Item>
                                             <MinusCircleOutlined onClick={() => remove(name)} />
                                         </Space>
@@ -82,8 +87,8 @@ const FormsPage = () => {
                     </Form>
                 </div >
             </Modal>}
-            </div>
-  );
+        </div>
+    );
 };
 
 export default FormsPage;
