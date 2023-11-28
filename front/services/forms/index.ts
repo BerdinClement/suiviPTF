@@ -115,3 +115,29 @@ export async function createForm(title: string, questions: any, date: string) {
 
     return res;
 }
+
+export async function getLast() {
+    const axios = require('axios');
+
+    const token = localStorage.getItem('token');
+
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/form/last`,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    };
+
+    const forms = await axios.request(config)
+        .then((response: any) => {
+            return response.data;
+        })
+        .catch((error: Error) => {
+            return error;
+        });
+
+    return forms;
+}
