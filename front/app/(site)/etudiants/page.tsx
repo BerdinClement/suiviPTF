@@ -78,7 +78,10 @@ const StudentsPage = () => {
 
   useEffect(() => {
     const fetchTutors = async () => {
-      const res = await getAllTutors();
+      let res = await getAllTutors();
+      res = res.map((tutor: any) => {
+        return { value: tutor._id, label: tutor.user.firstName + " " + tutor.user.lastName };
+      });
       setTutors(res);
     };
     fetchTutors();
@@ -193,9 +196,9 @@ const StudentsPage = () => {
                   key={index}
                 ></Input>
               ))}
-              <div className="flex justify-center pt-6">
-                <Dropdown className="" options={tutors}></Dropdown>
+              <Dropdown className="min-w-full" options={tutors}></Dropdown>
 
+              <div className="flex justify-center pt-6">
                 <Button type="submit" className="bg-slate-700 w-10/12">
                   Ajouter un étudiant
                 </Button>

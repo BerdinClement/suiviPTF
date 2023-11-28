@@ -4,13 +4,18 @@ import React from 'react';
 
 interface DropdownProps {
     className?: string;
-    options: string[];
-}
+    options: {
+        label: string;
+        value: string;
+    }[] 
+};
+
 
 const Dropdown = ({ className, options }: DropdownProps) => {
     return (
         <div>
             <select
+                placeholder='Select an option'
                 className={`
                     relative 
                     bg-gray-50ring-0 
@@ -24,14 +29,14 @@ const Dropdown = ({ className, options }: DropdownProps) => {
                     focus:ring-black-500 
                     focus:border-black-500 
                     block 
-                    w-48 
+                    w-full
                     p-2.5 
                     checked:bg-emerald-500
                 `}>
                 {
                     options.map((option, index) => {
                         return (
-                            <option>{option}</option>
+                            <option value={option.value}>{option.label}</option>
                         )
                     })
                 }
