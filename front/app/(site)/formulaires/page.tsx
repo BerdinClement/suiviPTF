@@ -15,6 +15,13 @@ import { useContext } from "react";
 const FormsPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(UserContext);
+
+  const [title, setTitle] = useState("");
+
+  const handleSubmit = async (values: any) => {
+    console.log(values);
+  };
+
   const [activeTitle, setActiveTitle] = useState("");
   return (
     <div className="w-full h-full bg-background">
@@ -71,11 +78,14 @@ const FormsPage = () => {
               name="dynamic_form_nest_item"
               autoComplete="off"
               layout="vertical"
+              onFinish={handleSubmit}
             >
               <Form.List name="users">
                 {(fields, { add, remove }) => (
                   <>
                     <Input
+                      value={title}
+                      setValue={setTitle}
                       className="w-full"
                       type="text"
                       placeholder="Titre ..."

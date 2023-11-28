@@ -49,3 +49,33 @@ export async function getFormById(id: string) {
 
     return form;
 }
+
+export async function createForm(title: string) {
+    const axios = require('axios');
+    let data = JSON.stringify({
+        "title": title
+    });
+
+    const token = localStorage.getItem('token');
+
+    let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/form`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+        data: data
+    };
+
+    const res = await axios.request(config)
+        .then((response: any) => {
+            return {succes : true, data: response.data};
+        })
+        .catch((error: Error) => {
+            return {succes : false, data: error};
+        });
+
+    return res;
+}
