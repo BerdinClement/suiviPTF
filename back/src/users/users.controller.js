@@ -185,7 +185,12 @@ const usersController = {
         const tutorId = req.params.id;
         const { students } = req.body;
         Tutor.findByIdAndUpdate(tutorId, {$push : {students: students}}).then((tutor) => {
-            res.status(200).json(tutor);
+            Student.updateMany({_id: students}, {tutor: tutorId}).then((students) => {
+                res.status(200).json(students);
+            }).catch((err) => {
+                logger.error(`${req.method} ${req.originalUrl} ${err}`)
+                res.status(404).json(err);
+            })
         }).catch((err) => {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
@@ -195,7 +200,12 @@ const usersController = {
         const tutorId = req.params.id;
         const { students } = req.body;
         Tutor.findByIdAndUpdate(tutorId, {$pull : {students: students}}).then((tutor) => {
-            res.status(200).json(tutor);
+            Student.updateMany({_id: students}, {tutor: null}).then((students) => {
+                res.status(200).json(students);
+            }).catch((err) => {
+                logger.error(`${req.method} ${req.originalUrl} ${err}`)
+                res.status(404).json(err);
+            })
         }).catch((err) => {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
