@@ -4,7 +4,6 @@ import Hello from "@/components/Hello";
 import React from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import Icon from "@ant-design/icons";
 import Link from "next/link";
 import { UserContext } from "@/context/userContext";
 import { Divider } from "antd";
@@ -13,6 +12,11 @@ import { useContext } from "react";
 
 const ProfilPage = () => {
   const { user } = useContext(UserContext);
+
+  const [newPassword, setNewPassword] = React.useState("");
+  const [oldPassword, setOldPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+
   return (
     <div className="bg-background h-full">
       <FormOutlined className="p-2 m-2 text-[20px] opacity-40 float-right" />
@@ -34,7 +38,7 @@ const ProfilPage = () => {
             <div className="">
               {user.user.student && (
                 <h1 className="md:mb-4 text-lg">
-                  Tuteur : {user.user.student.tutor}
+                  Tuteur : {user.user.student.tutor?.user.firstName ? user.user.student.tutor.user.firstName : ''} {user.user.student.tutor?.user.lastName ? user.user.student.tutor.user.lastName : ''}
                 </h1>
               )}
               {user.user.student && (
@@ -57,16 +61,22 @@ const ProfilPage = () => {
               type="text"
               placeholder="Ancien mot de passe"
               className="min-w-full mb-2 bg-white"
+              value={oldPassword}
+              setValue={setOldPassword}
             ></Input>
             <Input
               type="text"
               placeholder="Nouveau mot de passe"
               className="min-w-full mb-2 bg-white"
+              value={newPassword}
+              setValue={setNewPassword}
             ></Input>
             <Input
               type="text"
               placeholder="Nouveau mot de passe"
               className="min-w-full mb-2 bg-white"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
             ></Input>
             <div className="flex justify-center pt-6">
               <Button type="submit" className="bg-slate-700 w-10/12">
@@ -80,7 +90,7 @@ const ProfilPage = () => {
             href="mailto:noa.watel@gmail.com"
             className="rounded-full text-center bg-slate-700 md:w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
           >
-            Envoyer un mail à : blabla
+            Envoyer un mail à : {user.user.student.tutor?.user.email ? user.user.student.tutor.user.email : ""}
           </Link>
         )}
       </div>

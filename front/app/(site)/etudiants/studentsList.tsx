@@ -10,6 +10,12 @@ interface StudentListProps {
 }
 
 interface Student {
+  tutor?: {
+    user: {
+      firstName: string;
+      lastName: string;
+    };
+  };
   user: {
     firstName: string;
     lastName: string;
@@ -40,6 +46,8 @@ const StudentsList = ({ activeName, setActiveName }: StudentListProps) => {
         activeName = activeName.toLowerCase();
         const lastName = student.user.lastName.toLowerCase();
         const firstName = student.user.firstName.toLowerCase();
+
+        const tutorName = `${student.tutor?.user.firstName ? student.tutor?.user.firstName : ''} ${student.tutor?.user.lastName ? student.tutor?.user.lastName : ''}`;
         if (
           activeName === "" ||
           lastName.includes(activeName) ||
@@ -50,7 +58,7 @@ const StudentsList = ({ activeName, setActiveName }: StudentListProps) => {
               key={index}
               name={`${student.user.firstName} ${student.user.lastName}`}
               email={student.user.email}
-              year={"2002"}
+              year={tutorName}
               className="w-full md:w-80"
             />
           );
