@@ -91,7 +91,7 @@ const formController = {
         })
     },
     getLast : async (req, res) => {
-        Form.find().sort({date: -1}).limit(1).then((form) => {
+        Form.find().sort({date: -1}).limit(5).then((form) => {
             if (form) {
                 res.status(200).json(form)
             } else {
