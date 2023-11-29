@@ -8,7 +8,6 @@ import Link from "next/link";
 import Image from 'next/image'
 import React, { useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { logout } from "@/services/auth";
 import { UserContext } from "@/context/userContext";
 
 
@@ -23,7 +22,7 @@ const Sidebar = ({ children }: SidebarProps) => {
 
     const path = usePathname();
 
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
     
     var role = [RESTRICTED.ALL];
     if (user.user.student) {
@@ -37,7 +36,8 @@ const Sidebar = ({ children }: SidebarProps) => {
     }
 
     const handleLogout = async () => {
-        await logout();
+        localStorage.removeItem("token");
+        setUser(null);
         router.push("/login");
     }
 

@@ -4,6 +4,8 @@ import React from 'react';
 
 interface DropdownProps {
     className?: string;
+    studentTutor: string;
+    setStudentTutor: (value: string) => void;
     options: {
         label: string;
         value: string;
@@ -11,11 +13,13 @@ interface DropdownProps {
 };
 
 
-const Dropdown = ({ className, options }: DropdownProps) => {
+const Dropdown = ({ className, options, studentTutor, setStudentTutor }: DropdownProps) => {
     return (
         <div>
             <select
                 placeholder='Select an option'
+                value={studentTutor}
+                onChange={(e) => setStudentTutor(e.target.value)}
                 className={`
                     relative 
                     bg-gray-50ring-0 

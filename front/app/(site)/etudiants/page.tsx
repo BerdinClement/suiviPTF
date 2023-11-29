@@ -8,7 +8,7 @@ import StudentsList from "./studentsList";
 import Modal from "@/components/Modal";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
-import {createStudent, getAllTutors} from "@/services/users";
+import {affectStudents, createStudent, getAllTutors} from "@/services/users";
 import { message } from "antd";
 import Dropdown from "@/components/Dropdown";
 
@@ -94,7 +94,7 @@ const StudentsPage = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await createStudent(
+      const student = await createStudent(
         email,
         password,
         firstName,
@@ -103,12 +103,13 @@ const StudentsPage = () => {
         studentNumber
       );
 
-      if (!res.status) {
+      if (!student.status) {
         messageApi.open({
           type: "error",
           content:
             "Une erreur est survenue lors de la création de l'étudiant ! ",
-        });
+        });        
+
         setEmail("");
         setPassword("");
         setIne("");
@@ -123,6 +124,32 @@ const StudentsPage = () => {
         type: "success",
         content: "L'étudiant a bien été créé ! ",
       });
+
+      
+      const affect = await affectStudents(studentTutor, [student.data.student]);
+
+      if (!affect.status) {
+        messageApi.open({
+          type: "error",
+          content:
+            "Une erreur est survenue lors de l'affectation de l'étudiant ! ",
+        });        
+
+        setEmail("");
+        setPassword("");
+        setIne("");
+        setStudentNumber("");
+        setLastName("");
+        setFirstName("");
+        setOpenModal(false);
+        return;
+      }
+
+      messageApi.open({
+        type: "success",
+        content: "L'étudiant a bien été affecté ! ",
+      });
+
       setEmail("");
       setPassword("");
       setIne("");
@@ -196,7 +223,7 @@ const StudentsPage = () => {
                   key={index}
                 ></Input>
               ))}
-              <Dropdown className="min-w-full" options={tutors}></Dropdown>
+              <Dropdown studentTutor={studentTutor} setStudentTutor={setStudentTutor} className="min-w-full" options={tutors}></Dropdown>
 
               <div className="flex justify-center pt-6">
                 <Button type="submit" className="bg-slate-700 w-10/12">

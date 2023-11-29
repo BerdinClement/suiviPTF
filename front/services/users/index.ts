@@ -83,10 +83,10 @@ export async function createStudent(email: string, password: string, firstName: 
 
   const res = await axios.request(config)
     .then((response: any) => {
-      return {status: true, data: response.data};
+      return { status: true, data: response.data };
     })
     .catch((error: Error) => {
-      return {status: false, data: error};
+      return { status: false, data: error };
     });
 
   return res;
@@ -119,10 +119,41 @@ export async function createTutor(email: string, password: string, firstName: st
 
   const res = await axios.request(config)
     .then((response: any) => {
-      return {status: true, data: response.data};
+      return { status: true, data: response.data };
     })
     .catch((error: Error) => {
-      return {status: false, data: error};
+      return { status: false, data: error };
+    });
+
+  return res;
+}
+
+export async function affectStudents(tutorId: string, students: string[]) {
+  const axios = require('axios');
+
+  const token = localStorage.getItem('token');
+
+  let data = JSON.stringify({
+    "students": students
+  });
+
+  let config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/tutor/students/${tutorId}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+    },
+    data: data
+  };
+
+  const res = await axios.request(config)
+    .then((response: any) => {
+      return { status: true, data: response.data };
+    })
+    .catch((error: Error) => {
+      return { status: false, data: error };
     });
 
   return res;
