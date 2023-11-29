@@ -94,7 +94,17 @@ const usersController = {
         if(token){
             jwt.verify(token, jwtSecret, {}, async (err, userData) => {
                 if(err) throw err
-                const user = await User.findById(userData._id).populate('student')
+                const user = await User.findById(userData._id, {options: {strictPopulate: false}}).populate({
+                    path: 'student',
+                    populate: {
+                        path: 'tutor',
+                        model: 'Tutor',
+                        populate: {
+                            path: 'user',
+                            model: 'User'
+                        }
+                    }
+                })
                 user.password = undefined
                 res.json({token, user})
             })
@@ -106,7 +116,15 @@ const usersController = {
         res.cookie('token','').status(204).json(null)
     },
     getAllStudents: async (req, res) => {
-        const students = await Student.find().populate({path: 'user', match: {active: true}});
+        const students = await Student.find().populate({
+            path: 'user tutor',
+        }).populate({
+            path: 'tutor',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    });
         if (!students) {
             res.status(404).json({ message: 'Students not found' });
         }
