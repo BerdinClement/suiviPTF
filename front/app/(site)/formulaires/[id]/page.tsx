@@ -4,9 +4,9 @@ import Button from '@/components/Button';
 import { Descriptions, message } from 'antd';
 import type { DescriptionsProps } from 'antd';
 import { useContext, useEffect, useState } from 'react';
-import { getFormById } from '@/services/forms';
+import { getFormById, getFormByIdUser } from '@/services/forms';
 import { createManyResponse } from '@/services/responses';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 
 interface Form {
@@ -39,11 +39,17 @@ export default function FormPage({ params }: { params: { id: string } }) {
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
     const { user } = useContext(UserContext);
+    const searchParams = useSearchParams();
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const res = await getFormById(params.id);
-            setForm(res);
+            if (!searchParams.get('user')) {
+                const res = await getFormById(params.id);
+                setForm(res);
+            } else {
+                const res = await getFormByIdUser(params.id, searchParams.get('user'));
+                setForm(res);
+            }
         };
         fetchStudents();
     }, []);
@@ -56,7 +62,7 @@ export default function FormPage({ params }: { params: { id: string } }) {
         const userResponse = form?.questions.map((question: Question) => {
             let response = question.responses.find((response: Response) => {
                 
-                return response.student?.user === user?.user._id
+                return response.student?.user === (searchParams.get('user') ? searchParams.get('user') : user.user._id)
             });
             if (response !== undefined) {
                 response = { questionId: question._id, ...response }

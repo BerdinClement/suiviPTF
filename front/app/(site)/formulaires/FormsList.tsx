@@ -11,11 +11,11 @@ interface FormProp {
 }
 
 interface FormListProps {
+  activeUser?: string;
   activeTitle: string;
-  setActiveTitle: (title: string) => void;
 }
 
-const FormsList = ({ activeTitle, setActiveTitle }: FormListProps) => {
+const FormsList = ({ activeTitle, activeUser }: FormListProps) => {
   const [forms, setForms] = useState([]);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ const FormsList = ({ activeTitle, setActiveTitle }: FormListProps) => {
         if (activeTitle === "" || title.includes(activeTitle)) {
           return (
             <FormCard
+              activeUser={activeUser}
               title={`${form.title}`}
               date={form.date}
               id={form._id}

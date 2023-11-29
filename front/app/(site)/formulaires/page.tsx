@@ -12,10 +12,13 @@ import { Button as ButtonAntd } from "antd";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
 import { createForm } from "@/services/forms";
+import { useSearchParams } from "next/navigation";
 
 const FormsPage = () => {
     const [openModal, setOpenModal] = useState(false);
     const { user } = useContext(UserContext);
+
+    const searchParams = useSearchParams();
 
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
@@ -78,11 +81,10 @@ const FormsPage = () => {
                         <RefreshButton />
                     </div>
                 </div>
-                {/* TODO : boucler sur tout les formulaires existants*/}
                 <div className="flex flex-wrap gap-4 w-full">
                     <FormsList
+                        activeUser={searchParams.get('user') ? searchParams.get('user') : undefined}
                         activeTitle={activeTitle}
-                        setActiveTitle={setActiveTitle}
                     />
                 </div>
             </div>

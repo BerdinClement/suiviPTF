@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 
 interface StudentCardProps {
+    id: string;
     name: string;
     email: string;
     year: string;
@@ -12,7 +13,7 @@ interface StudentCardProps {
     isTutor?: boolean;
 }
 
-const StudentCard = ({ name, email, year, className, isTutor }: StudentCardProps) => {
+const StudentCard = ({ name, email, year, className, isTutor, id }: StudentCardProps) => {
     {
         return (
             <div className={` ${className} bg-white p-4 shadow-lg rounded-lg hover:shadow-xl`}>
@@ -21,10 +22,10 @@ const StudentCard = ({ name, email, year, className, isTutor }: StudentCardProps
                 <h3>{year}</h3>
                 { !isTutor &&
                     <div className="flex flex-row justify-around pt-4 text-2xl ">
-                        <Link href={'/'} className="hover:shadow-sm">
+                        <Link href={`/formulaires?user=${id}`} className="hover:shadow-sm">
                             <SolutionOutlined />
                         </Link>
-                        <Link href={'/'} className="cursor-pointer hover:shadow-sm">
+                        <Link href={'/suivi'} className="cursor-pointer hover:shadow-sm">
                             <DesktopOutlined />
                         </Link>
                     </div>

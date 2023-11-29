@@ -17,6 +17,7 @@ interface Student {
     };
   };
   user: {
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -55,6 +56,7 @@ const StudentsList = ({ activeName, setActiveName }: StudentListProps) => {
         ) {
           return (
             <StudentCard
+              id={student.user._id}
               key={index}
               name={`${student.user.firstName} ${student.user.lastName}`}
               email={student.user.email}

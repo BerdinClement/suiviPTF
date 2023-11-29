@@ -101,7 +101,32 @@ const formController = {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err)
         })
-    }
+    },
+    getUserResponseByFormUser: async (req, res) => {
+        const {id, userId} = req.params;
+        const user = await User.findOne({_id: userId}).populate('student')
+        const form = Form.findById(id, {options: {strictPopulate: false}}).populate({
+            path: 'questions',
+            populate: {
+                path: 'responses',
+                model: 'Response',
+                populate: {
+                    path: 'student',
+                    model: 'Student',
+                    match: { _id: user.student._id }
+                }
+            }
+        }).then((form) => {
+            if (form) {
+                res.status(200).json(form)
+            } else {
+                res.status(204).json({ message: 'Form not found' })
+            }
+        }).catch((err) => {
+            logger.error(`${req.method} ${req.originalUrl} ${err}`)
+            res.status(404).json(err)
+        })
+    },
 }
 
 module.exports = formController

@@ -11,6 +11,7 @@ interface TutorListProps {
 
 interface Tutor {
   user: {
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -41,6 +42,7 @@ const TutorsList = ({ activeName, setActiveName }: TutorListProps) => {
         if (activeName === "" || lastName.includes(activeName) || firstName.includes(activeName) ) {
           return (
             <StudentCard
+              id={tutor.user._id}
               name={`${tutor.user.firstName} ${tutor.user.lastName}`}
               email={tutor.user.email}
               key={index}
