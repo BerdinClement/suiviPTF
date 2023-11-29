@@ -46,7 +46,7 @@ const TutorsList = ({ activeName, setActiveName }: TutorListProps) => {
               name={`${tutor.user.firstName} ${tutor.user.lastName}`}
               email={tutor.user.email}
               key={index}
-              year={"2002"}
+              year={""}
               className="w-full md:w-80"
               isTutor={true}
             />
