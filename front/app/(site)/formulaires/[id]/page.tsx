@@ -61,7 +61,7 @@ export default function FormPage({ params }: { params: { id: string } }) {
     if (responses.length === 0) {
         const userResponse = form?.questions.map((question: Question) => {
             let response = question.responses.find((response: Response) => {
-                
+
                 return response.student?.user === (searchParams.get('user') ? searchParams.get('user') : user.user._id)
             });
             if (response !== undefined) {
@@ -122,9 +122,12 @@ export default function FormPage({ params }: { params: { id: string } }) {
                     <QuestionForm key={q._id} id={q._id} question={q.text} response={responses} setResponse={setResponses} />
                 ))
             }
-            <div className="flex justify-center">
-                <Button type="submit" onClick={handleSubmit} className="bg-slate-700 w-4/12 ">Envoyer</Button>
-            </div>
+            {
+                !searchParams.get('user') && (
+                    <div className="flex justify-center">
+                        <Button type="submit" onClick={handleSubmit} className="bg-slate-700 w-4/12 ">Envoyer</Button>
+                    </div>)
+            }
         </div>
     )
 }
