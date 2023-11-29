@@ -3,12 +3,12 @@
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import RefreshButton from "@/components/RefreshButton";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import StudentsList from "./studentsList";
 import Modal from "@/components/Modal";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
-import {affectStudents, createStudent, getAllTutors} from "@/services/users";
+import { affectStudents, createStudent, getAllTutors } from "@/services/users";
 import { message } from "antd";
 import Dropdown from "@/components/Dropdown";
 
@@ -43,7 +43,7 @@ const StudentsPage = () => {
     },
     {
       label: "E-Mail",
-      placeholder: "E-Mail : ...",
+      placeholder: "E-Mail * : ...",
       type: "email",
       pattern: ".+@etu.univ-littoral.fr",
       required: true,
@@ -52,7 +52,7 @@ const StudentsPage = () => {
     },
     {
       label: "Mot de passe",
-      placeholder: "Mot de passe : ...",
+      placeholder: "Mot de passe * : ...",
       type: "password",
       required: true,
       value: password,
@@ -80,7 +80,10 @@ const StudentsPage = () => {
     const fetchTutors = async () => {
       let res = await getAllTutors();
       res = res.map((tutor: any) => {
-        return { value: tutor._id, label: tutor.user.firstName + " " + tutor.user.lastName };
+        return {
+          value: tutor._id,
+          label: tutor.user.firstName + " " + tutor.user.lastName,
+        };
       });
       setTutors(res);
     };
@@ -108,7 +111,7 @@ const StudentsPage = () => {
           type: "error",
           content:
             "Une erreur est survenue lors de la création de l'étudiant ! ",
-        });        
+        });
 
         setEmail("");
         setPassword("");
@@ -125,7 +128,6 @@ const StudentsPage = () => {
         content: "L'étudiant a bien été créé ! ",
       });
 
-      
       const affect = await affectStudents(studentTutor, [student.data.student]);
 
       if (!affect.status) {
@@ -133,7 +135,7 @@ const StudentsPage = () => {
           type: "error",
           content:
             "Une erreur est survenue lors de l'affectation de l'étudiant ! ",
-        });        
+        });
 
         setEmail("");
         setPassword("");
@@ -208,7 +210,7 @@ const StudentsPage = () => {
         >
           <div className="bg-background w-full max-w-[700px] bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Créer un étudiants
+              Créer un étudiant
             </h2>
             <form className="flex flex-col" onSubmit={handleSubmit}>
               {inputStudent.map((input, index) => (
@@ -223,7 +225,12 @@ const StudentsPage = () => {
                   key={index}
                 ></Input>
               ))}
-              <Dropdown studentTutor={studentTutor} setStudentTutor={setStudentTutor} className="min-w-full" options={tutors}></Dropdown>
+              <Dropdown
+                studentTutor={studentTutor}
+                setStudentTutor={setStudentTutor}
+                className="min-w-full"
+                options={tutors}
+              ></Dropdown>
 
               <div className="flex justify-center pt-6">
                 <Button type="submit" className="bg-slate-700 w-10/12">

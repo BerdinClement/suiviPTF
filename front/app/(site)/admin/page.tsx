@@ -37,7 +37,7 @@ const AdminPage = () => {
     },
     {
       label: "E-Mail",
-      placeholder: "E-Mail : ...",
+      placeholder: "E-Mail * : ...",
       type: "email",
       pattern: ".+@univ-littoral.fr",
       required: true,
@@ -46,7 +46,7 @@ const AdminPage = () => {
     },
     {
       label: "Mot de passe",
-      placeholder: "Mot de passe : ...",
+      placeholder: "Mot de passe * : ...",
       type: "password",
       required: true,
       value: password,
@@ -60,21 +60,21 @@ const AdminPage = () => {
     setPrenom("");
     setEmail("");
     setPassword("");
-  }
+  };
 
   const [messageApi, contextHolder] = message.useMessage();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const res = await createTutor(email, password, prenom, nom);
-    if(!res.status){
+    if (!res.status) {
       reset();
       messageApi.error("Une erreur est survenue lors de la création du tuteur");
       return;
     }
     reset();
     messageApi.success("Le tuteur a bien été créé");
-  }
+  };
 
   const [activeName, setActiveName] = useState("");
 
