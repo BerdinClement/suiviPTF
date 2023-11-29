@@ -54,8 +54,10 @@ export default function FormPage({ params }: { params: { id: string } }) {
 
     if (responses.length === 0) {
         const userResponse = form?.questions.map((question: Question) => {
-            let response = question.responses.find((response: Response) => response.student.user._id === user?._id);
-
+            let response = question.responses.find((response: Response) => {
+                
+                return response.student?.user === user?.user._id
+            });
             if (response !== undefined) {
                 response = { questionId: question._id, ...response }
             }
@@ -102,7 +104,6 @@ export default function FormPage({ params }: { params: { id: string } }) {
 
         messageApi.success(`${res.count} réponses envoyées avec succès`);
 
-        //router.push('/formulaires');
     }
 
     return (

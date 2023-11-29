@@ -33,8 +33,6 @@ const QuestionForm = ({ id, question, response, setResponse }: QuestionFormProps
         } else {
             response.push({ questionId: id, text: value, student: { user: { _id: '' } } });
         }
-        console.log(response);
-        
         setResponse(response);
     }
 
