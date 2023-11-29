@@ -32,7 +32,8 @@ const responsesController = {
             res.status(401).json({error: "Unauthorized"})
         }
         const decodedToken = verify(token, process.env.JWT_SECRET)
-        const user = await User.findOne({id: decodedToken.id}).populate('student')
+        const user = await User.findOne({_id: decodedToken._id}).populate('student')
+        logger.info(`${req.method} ${req.originalUrl} User ${user.email} is creating a response`)
         const student = user.student
         const checkResponse = await Response.findOne({student: student._id, question: questionId})
         if (checkResponse) {
