@@ -29,16 +29,8 @@ const SuiviPage = () => {
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-4">
-                    {/*  TODO : boucler sur tout les suivis existants */}
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
-                    <SuiviCard href="/suivi/1" className="w-full md:w-60" />
+                    <SuiviCard href="/suivi/1" className="w-full md:w-60" id="1"/>
+                    <SuiviCard href="/suivi/2" className="w-full md:w-60" id="2"/>
                 </div>
             </div>
             {openModal &&  <Modal  className="w-[700px]" buttonText="Ajouter l'étudiant" open={openModal} onClose={() => setOpenModal(false)}>

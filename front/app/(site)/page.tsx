@@ -12,32 +12,37 @@ import { getLast } from "@/services/forms";
 
 const history = [
   {
-    date: "12/12/2021",
-    title: "Titre 1",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    date: "28/11/2023",
+    title: "Validation",
+    content: "Anne Pacou et vous avez validé le formulaire Visite entreprise S5."
 
   },
   {
-    date: "12/12/2021",
-    title: "Titre 2",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    date: "27/11/2023",
+    title: "Modification",
+    content: "Anne Pacou a modifié le formulaire Visite entreprise S5."
 
   },
   {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    date: "25/11/2023",
+    title: "Enregistrement",
+    content: "Anne Pacou a enregistré des réponse dans le formulaire Visite entreprise S5. Vous n'avez pas encore validé."
+  },
+  {
+    date: "19/10/2023",
+    title: "Validation",
+    content: "Anne Pacou a validé le formulaire Entretrien FBI S5."
 
   },
   {
-    date: "12/12/2021",
-    title: "Titre 4",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    date: "12/10/2023",
+    title: "Enregistrement",
+    content: "Vous avez enregistré des réponse dans le formulaire Entretrien FBI S5. Anne Pacou n'a pas encore validé."
   },
   {
-    date: "12/12/2021",
-    title: "Titre 3",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    date: "20/09/2023",
+    title: "Affectation",
+    content: "Anne Pacou vous a été affectée comme tuteur pédagogique."
 
   }
 ]
@@ -109,7 +114,7 @@ export default function Home() {
       <div className="h-full flex-1 px-2 pt-10 hidden md:block flex flex-col">
         <Hello />
         <Divider />
-        <p className="text-[1.8vw]">Historique</p>
+        <p className="text-[1.8vw] ml-2">Historique</p>
         {
           history.map((history, index) => {
             return (

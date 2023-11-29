@@ -87,10 +87,10 @@ const ProfilPage = () => {
         </div>
         {user.user.student && (
           <Link
-            href="mailto:noa.watel@gmail.com"
+            href={`mailto: ${user.user.student.tutor?.user.email ? user.user.student.tutor.user.email : ""}`}
             className="rounded-full text-center bg-slate-700 md:w-1/3 border border-transparent px-3 py-3 text-white font-bold transition"
           >
-            Envoyer un mail à : {user.user.student.tutor?.user.email ? user.user.student.tutor.user.email : ""}
+            Envoyer un mail à : {user.user.student.tutor?.user.firstName ? user.user.student.tutor.user.firstName : ''} {user.user.student.tutor?.user.lastName ? user.user.student.tutor.user.lastName : ''}
           </Link>
         )}
       </div>
