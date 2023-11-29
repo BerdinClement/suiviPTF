@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET
 
-const Logger = require('../utils/Logger');
+const Logger = require('../utils/logger');
 const logger = Logger.getInstance();
 
 const usersController = {
