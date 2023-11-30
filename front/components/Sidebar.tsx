@@ -36,9 +36,7 @@ const Sidebar = ({ children }: SidebarProps) => {
     }
 
     const handleLogout = async () => {
-        localStorage.removeItem("token");
-        setUser(null);
-        router.push("/login");
+        router.push("/logout");
     }
 
     return (
