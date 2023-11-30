@@ -1,0 +1,1251 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Suivi PTF API - OpenAPI 3.0",
+    "description": "This is the API documentation for the Suivi PTF application asked by the IUT of Calais.",
+    "contact": {
+      "email": "marina.flament12@gmail.com",
+      "name": "FLAMENT Marina"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Everything about users."
+    },
+    {
+      "name": "Forms",
+      "description": "Everything about forms."
+    },
+    {
+      "name": "Questions",
+      "description": "Everything about questions."
+    },
+    {
+      "name": "Responses",
+      "description": "Everything about responses."
+    }
+  ],
+  "paths": {
+    "/api/users/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User",
+        "description": "This route will allow us to update a user in the database",
+        "operationId": "patchUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "You can update the email, the first name, the last name and the phone number of the user.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/updateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "acknowledged": {
+                        "type": "boolean",
+                        "example": "true"
+                      },
+                      "modifiedCount": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "upsertedId": {
+                        "type": "string",
+                        "example": "null"
+                      },
+                      "upsertedCount": {
+                        "type": "integer",
+                        "example": 0
+                      },
+                      "matchedCount": {
+                        "type": "integer",
+                        "example": "1"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error with the server"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Desactivate a User",
+        "description": "This route will allow us to desactivate a User in the database, only if you're an administrator.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user is deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pokedexNumber": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Bulbizarre"
+                    },
+                    "types": {
+                      "type": "string",
+                      "example": [
+                        "plante",
+                        "poison"
+                      ]
+                    },
+                    "height": {
+                      "type": "number",
+                      "example": 160
+                    },
+                    "weight": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "645e0c48ef7a9a29d3148ecd"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "You are not an admin"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error with the server"
+          }
+        }
+      }
+    },
+    "/api/users/student": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create one student account only if you're an administrator.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The student to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/createStudent"
+            }
+          }
+        ],
+        "description": "This route will allow us to create one student account in the database",
+        "operationId": "createStudent",
+        "responses": {
+          "201": {
+            "description": "The student is created",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Error 404"
+          },
+          "500": {
+            "description": "Error with the server"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "This route will allow us to get all students in the database",
+        "operationId": "getUsers",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/student/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a student account",
+        "description": "This route will allow us to update a student account in the database.",
+        "operationId": "updateStudent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the student to update.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "You can update the ine and / or the num_etu of the student.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/updateStudent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/tutor": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all the tutors",
+        "description": "This route will allow us to get all the tutors in the database.",
+        "operationId": "getTutors",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a tutor account",
+        "description": "This route will allow us to create a tutor account in the database.",
+        "operationId": "createTutor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The tutor to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/createTutor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tutor created"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/tutor/students/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Affect a student to a tutor",
+        "description": "This route will allow us to affect a student to a tutor.",
+        "operationId": "addStudentToTutor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the tutor.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The student to add to the tutor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/affectStudent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a student of a tutor",
+        "description": "This route will allow us to update a student of a tutor.",
+        "operationId": "updateStudentOfTutor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the tutor.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The student to update of the tutor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/affectStudent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/profile": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a user profile",
+        "description": "This route will allow us to get a profile of a student.",
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "204": {
+            "description": "Error 204"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login a user",
+        "description": "This route will allow us to login a user into the application",
+        "operationId": "login",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The user to login.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/loginUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          },
+          "500": {
+            "description": "Error server"
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logout a user",
+        "description": "This route will allow us to logout a user of the application by deleting the cookies of the user.",
+        "operationId": "logout",
+        "responses": {
+          "204": {
+            "description": "204"
+          }
+        }
+      }
+    },
+    "/api/users/activate/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Activate a user",
+        "description": "This route will allow us to activate a user account.",
+        "operationId": "activateUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the user to activate.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/desactivated": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all desactivated users",
+        "description": "This route qill qllow us to get all the users desactivated in the database.",
+        "operationId": "getUsersDesactivated",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/users/password/{id}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Change password",
+        "description": "This route will allow us to change a password of an account.",
+        "operationId": "changePassword",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the user to change the password.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new password of the user.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/changePassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/form": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Get all forms",
+        "description": "This route will allow us to get all forms in the database.",
+        "operationId": "getForms",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Create a form",
+        "description": "This route will allow us to create a form in the database.",
+        "operationId": "createForm",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The form to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/createForm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Form created"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/form/{id}": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Get a form",
+        "description": "This route will allow us to get a form in the database.",
+        "operationId": "getForm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the form to get.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Update a form",
+        "description": "This route will allow us to update a form in the database.",
+        "operationId": "updateForm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the form to update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new title of the form.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/createForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Delete a form",
+        "description": "This route will allow us to delete a form in the database.",
+        "operationId": "deleteForm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the form to delete.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/form/responses/{id}": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "summary": "Get all responses of a form",
+        "description": "This route will allow us to get all responses of a form in the database.",
+        "operationId": "getResponsesOfForm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the form to get the responses.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/questions": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get all questions",
+        "description": "This route will allow us to get all questions in the database.",
+        "operationId": "getQuestions",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/questions/{id}": {
+      "delete": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Delete a question",
+        "description": "This route will allow us to delete a question in the database.",
+        "operationId": "deleteQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the question to delete.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Update a question",
+        "description": "This route will allow us to update a question in the database.",
+        "operationId": "updateQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the question to update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new title of the question.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/updateQuestion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/questions/{formId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get all questions of a form",
+        "description": "This route will allow us to get all questions of a form in the database.",
+        "operationId": "getQuestionsOfForm",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "formId",
+            "description": "The id of the form to get the questions.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Create one or many question",
+        "description": "This route will allow us to create one or many question in the database",
+        "operationId": "createQuestion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "formId",
+            "description": "The id of the form to create the question.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The question to create.",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                { "$ref": "#/components/schemas/updateQuestion" },
+                { "$ref": "#/components/schemas/createManyQuestion" }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The question is created"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/responses": {
+      "get": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Get all responses",
+        "description": "This route will allow us to get all responses in the database.",
+        "operationId": "getResponses",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/responses/{id}": {
+      "get": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Get a response",
+        "description": "This route will allow us to get a response in the database.",
+        "operationId": "getResponse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the response to get.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Delete a response",
+        "description": "This route will allow us to delete a response in the database.",
+        "operationId": "deleteResponse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The id of the response to delete.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response is deleted"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    },
+    "/api/responses/{questionId}": {
+      "post": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Add a response",
+        "description": "This route will allow us to add a response in the database.",
+        "operationId": "addResponse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "questionId",
+            "description": "The id of the question to add the response.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The response to add.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/addResponse"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The response is created"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Update a response",
+        "description": "This route will allow us to update a response in the database.",
+        "operationId": "updateResponse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "questionId",
+            "description": "The id of the question to update the response.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The response to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/addResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response is updated"
+          },
+          "404": {
+            "description": "Error 404"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "createStudent": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@doe.fr",
+            "description": "The email of the user"
+          },
+          "password": {
+            "type": "string",
+            "example": "JohnPassword",
+            "description": "The password of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "The first name of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "The last name of the user"
+          },
+          "phone": {
+            "type": "string",
+            "example": "00.00.00.00.00",
+            "description": "The phone number of the user"
+          },
+          "student": {
+            "type": "object",
+            "properties": {
+              "ine": {
+                "type": "string",
+                "example": "000000000FR",
+                "description": "The INE number of the student"
+              },
+              "num_etu": {
+                "type": "number",
+                "example": 12341234,
+                "description": "The student number of the student"
+              }
+            }
+          }
+        }
+      },
+      "createTutor": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@doe.fr",
+            "description": "The email of the tutor"
+          },
+          "password": {
+            "type": "string",
+            "example": "JohnPassword",
+            "description": "The password of the tutor"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "The first name of the tutor"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "The last name of the tutor"
+          },
+          "phone": {
+            "type": "string",
+            "example": "00.00.00.00.00",
+            "description": "The phone number of the tutor"
+          }
+        }
+      },
+      "updateStudent": {
+        "type": "object",
+        "properties": {
+          "ine": {
+            "type": "string",
+            "example": "000000000FR",
+            "description": "The new INE number of the student"
+          },
+          "num_etu": {
+            "type": "number",
+            "example": 12341234,
+            "description": "The new student number of the student"
+          }
+        }
+      },
+      "updateUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@doe.fr",
+            "description": "The new email of the user"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "The new first name of the user"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "The new last name of the user"
+          },
+          "phone": {
+            "type": "string",
+            "example": "00.00.00.00.00",
+            "description": "The new phone number of the user"
+          }
+        }
+      },
+      "loginUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@doe.fr",
+            "description": "The email of the user",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "example": "JohnPassword",
+            "description": "The password of the user",
+            "required": true
+          }
+        }
+      },
+      "changePassword": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "example": "JohnPassword",
+            "description": "The new password of the user",
+            "required": true
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "affectStudent": {
+        "type": "object",
+        "properties": {
+          "students": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "645e0c48ef7a9a29d3148ecd"
+            }
+          }
+        }
+      },
+      "createForm": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Formulaire de suivi PTF",
+            "description": "The title of the form"
+          }
+        }
+      },
+      "updateQuestion": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "example": "Quel est votre nom ?",
+            "description": "The new text of the question"
+          },
+          "type": {
+            "type": "string",
+            "example": "text",
+            "description": "The new type of the question"
+          },
+          "required": {
+            "type": "boolean",
+            "example": "true",
+            "description": "The new required of the question"
+          }
+        }
+      },
+      "createManyQuestion": {
+        "type": "object",
+        "properties": {
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "example": "Quel est votre nom ?",
+                  "description": "The text of the question"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "text",
+                  "description": "The type of the question"
+                },
+                "required": {
+                  "type": "boolean",
+                  "example": "true",
+                  "description": "The required of the question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "addResponse": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "example": "Response",
+            "description": "The text of the response"
+          }
+        }
+      }
+    }
+  }
+}
