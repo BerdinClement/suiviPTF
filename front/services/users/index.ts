@@ -77,6 +77,7 @@ export async function createStudent(email: string, password: string, firstName: 
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
+      "Access-Control-Allow-Origin": "*",
     },
     data: data
   };
@@ -113,6 +114,7 @@ export async function createTutor(email: string, password: string, firstName: st
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
+      "Access-Control-Allow-Origin": "*",
     },
     data: data
   };
@@ -144,6 +146,7 @@ export async function affectStudents(tutorId: string, students: string[]) {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
+      "Access-Control-Allow-Origin": "*",
     },
     data: data
   };
@@ -154,6 +157,34 @@ export async function affectStudents(tutorId: string, students: string[]) {
     })
     .catch((error: Error) => {
       return { status: false, data: error };
+    });
+
+  return res;
+}
+
+export async function getAllStudentsByTutor(tutorId: string) {
+  const axios = require("axios");
+
+  const token = localStorage.getItem("token");
+
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/student/${tutorId}`,
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
+
+  const res = await axios
+    .request(config)
+    .then((response: any) => {
+      return response.data;
+    })
+    .catch((error: Error) => {
+      console.log(error);
     });
 
   return res;

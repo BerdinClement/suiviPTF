@@ -228,7 +228,28 @@ const usersController = {
             logger.error(`${req.method} ${req.originalUrl} ${err}`)
             res.status(404).json(err);
         })
-    }
+    },
+    getAllStudentsByTutor: async (req, res) => {
+        const tutorId = req.params.id;
+        const students = await Student.find().populate({
+            path: 'user tutor',
+        }).populate({
+            path: 'tutor',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+        });
+        if (!students) {
+            res.status(404).json({ message: 'Students not found' });
+        }
+        students.forEach(student => {
+            if (!student.user) {
+                students.splice(students.indexOf(student), 1);
+            }
+        });
+        res.status(200).json(students);
+    },
 }
 
 module.exports = usersController;

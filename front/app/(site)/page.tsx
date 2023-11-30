@@ -9,6 +9,8 @@ import { RESTRICTED, SHORTCUT_LINKS } from "@/constants";
 import { UserContext } from "@/context/userContext";
 import { useContext, useEffect, useState } from "react";
 import { getLast } from "@/services/forms";
+import { getAllStudentsByTutor } from "@/services/users";
+import StudentCard from "@/components/StudentCard";
 
 const history = [
   {
@@ -58,14 +60,20 @@ export default function Home() {
   const { user } = useContext(UserContext);
 
   const [forms, setForms] = useState([]);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       const res = await getLast();
       setForms(res);
+      if(user.user.tutor) {
+        const res = await getAllStudentsByTutor(user.user._id);
+        setStudents(res);
+      }
+      
     };
     fetchStudents();
-    
+
   }, []);
 
   if (!forms) {
@@ -87,16 +95,41 @@ export default function Home() {
     <div className="w-full flex gap-2 flex-col-reverse md:flex-row">
 
       <div className="md:w-3/12 ">
-        <h1 className="text-2xl p-6 font-bold">Mes formulaires</h1>
-        <div className="flex flex-col gap-4">
-          {
-            forms.map((form: Form, index) => {
-              return (
-                <FormCard key={index} title={form.title} id={form._id} date={form.date} className="h-28" />
-              )
-            })
-          }
-        </div>
+        {
+          user.user.student && (
+            <>
+              <h1 className="text-2xl p-6 font-bold">Mes formulaires</h1>
+              <div className="flex flex-col gap-4">
+                {
+                  forms.map((form: Form, index) => {
+                    return (
+                      <FormCard key={index} title={form.title} id={form._id} date={form.date} className="h-28" />
+                    )
+                  })
+                }
+              </div>
+            </>)
+        }
+        {
+          user.user.tutor && (
+            <>
+              <h1 className="text-2xl p-6 font-bold">Mes élèves</h1>
+              <div className="flex flex-col gap-4">
+                {
+                  students.map((student: any, index) => {
+                    const tutorName = `${student.tutor?.user?.firstName ? student.tutor?.user?.firstName : ''} ${student.tutor?.user?.lastName ? student.tutor?.user?.lastName : ''}`;
+                    console.log(student);
+                    
+                    if (student.tutor?.user?._id === user.user._id) {
+                      return (
+                        <StudentCard id={student.user._id} name={`${student.user.firstName} ${student.user.lastName}`} email={student.user.email} year={tutorName} />
+                      )
+                    }
+                  })
+                }
+              </div>
+            </>)
+        }
       </div>
 
       <div className="w-full md:w-5/12">

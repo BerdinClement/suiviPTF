@@ -3,11 +3,13 @@ const router = require('express').Router();
 const usersController = require('./users.controller');
 const isAdmin = require("../middleware/isAdmin");
 const isConnected = require("../middleware/isConnected");
+const isTutor = require("../middleware/isTutor");
 
 router.patch('/:id',[isConnected], usersController.updateUser);
 
 router.post('/student',[isConnected, isAdmin], usersController.createStudent);
 router.get('/student',[isConnected], usersController.getAllStudents);
+router.get('/student/:id',[isConnected, isTutor], usersController.getAllStudentsByTutor);
 router.patch('/student/:id',[isConnected], usersController.updateStudent);
 
 router.post('/tutor', [isConnected, isAdmin], usersController.createTutor);
