@@ -1,6 +1,6 @@
+import { UserContextProvider } from '@/context/userContext'
 import './globals.css'
 import type { Metadata } from 'next'
-
 
 export const metadata: Metadata = {
   title: 'Suivi PTF',
@@ -14,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className='bg-white'>
+        <UserContextProvider>
+          {children}
+        </UserContextProvider>
+      </body>
     </html>
   )
 }
